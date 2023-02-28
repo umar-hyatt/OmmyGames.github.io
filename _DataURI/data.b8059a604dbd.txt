@@ -1,1 +1,0 @@
-chrome-extension://nllcnknpjnininklegdoijpljgdjkijc/bundles/writingMonitor.js
