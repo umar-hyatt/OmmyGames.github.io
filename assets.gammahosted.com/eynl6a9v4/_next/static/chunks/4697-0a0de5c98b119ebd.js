@@ -100906,7 +100906,7 @@
                 eK = l(22844),
                 eq = l(73146),
                 eJ = l(92405);
-            let e$ = "Made with Gamma. A new medium for presenting ideas, powered by AI.",
+            let e$ = "",
                 eQ = function(e) {
                     let t = arguments.length > 1 && void 0 !== arguments[1] && arguments[1];
                     return t ? e || "Untitled" : e ? "".concat(e, " | Gamma") : "Gamma"
