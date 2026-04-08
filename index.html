@@ -1174,7 +1174,7 @@
   <!-- ==================== Device Detection & 3D Loader ==================== -->
   <script>
     (function() {
-      const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent) || window.innerWidth < 1024;
+      const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent) || screen.width < 768;
       const site2d = document.getElementById('site-2d');
       const site3d = document.getElementById('site-3d');
       const loadScreen = document.getElementById('loading-screen');
