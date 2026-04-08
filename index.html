@@ -26,9 +26,6 @@
 
 <body>
 
-  <!-- Particle Canvas Background -->
-  <canvas id="particles-canvas"></canvas>
-
   <!-- ==================== Navigation ==================== -->
   <nav class="nav" id="nav">
     <div class="nav-inner">
@@ -62,18 +59,6 @@
       <div class="shape shape-2"></div>
       <div class="shape shape-3"></div>
       <div class="shape shape-4"></div>
-    </div>
-
-    <!-- 3D Rotating Game Cube -->
-    <div class="hero-cube-wrap" aria-hidden="true">
-      <div class="hero-cube">
-        <div class="cube-face cube-front"><img src="images/punchvrx.webp" alt="" width="180" height="180"></div>
-        <div class="cube-face cube-back"><img src="images/thunder-gladiator.webp" alt="" width="180" height="180"></div>
-        <div class="cube-face cube-right"><img src="images/bow-saber.webp" alt="" width="180" height="180"></div>
-        <div class="cube-face cube-left"><img src="images/prankster-cat.webp" alt="" width="180" height="180"></div>
-        <div class="cube-face cube-top"><img src="images/escape-the-nanny.webp" alt="" width="180" height="180"></div>
-        <div class="cube-face cube-bottom"><img src="images/screw-puzzle.webp" alt="" width="180" height="180"></div>
-      </div>
     </div>
 
     <div class="hero-content">
@@ -223,11 +208,6 @@
       </div>
     </div>
   </section>
-
-  <!-- ==================== Section Divider ==================== -->
-  <div class="section-divider" aria-hidden="true">
-    <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,80 L0,40 Q360,0 720,40 Q1080,80 1440,40 L1440,80 Z" fill="var(--surface)"/></svg>
-  </div>
 
   <!-- ==================== Games ==================== -->
   <section id="games" class="bg-alt">
@@ -541,10 +521,6 @@
     </div>
   </section>
 
-  <div class="section-divider flip" aria-hidden="true">
-    <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,0 L0,40 Q360,80 720,40 Q1080,0 1440,40 L1440,0 Z" fill="var(--surface)"/></svg>
-  </div>
-
   <!-- ==================== Services ==================== -->
   <section id="services">
     <div class="container">
@@ -686,14 +662,6 @@
 
   <!-- ==================== Tech Stack ==================== -->
   <section id="tech" class="bg-alt">
-    <div class="orbit-bg" aria-hidden="true">
-      <div class="orbit-ring orbit-ring-1"></div>
-      <div class="orbit-ring orbit-ring-2"></div>
-      <div class="orbit-ring orbit-ring-3"></div>
-      <div class="orbit-dot orbit-dot-1"></div>
-      <div class="orbit-dot orbit-dot-2"></div>
-      <div class="orbit-dot orbit-dot-3"></div>
-    </div>
     <div class="container">
       <div class="section-header reveal">
         <span class="section-label">Technology</span>
@@ -1142,233 +1110,61 @@
     });
 
     // ═══════════════════════════════════════════
-    //  3D VISUAL EFFECTS
+    //  SMOOTH 3D VISUAL EFFECTS
     // ═══════════════════════════════════════════
+    const isMobile = window.innerWidth < 768;
 
-    // ── Floating particle canvas background ──
-    (function() {
-      const canvas = document.getElementById('particles-canvas');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      let w, h, particles = [], mouse = { x: -1000, y: -1000 };
-
-      function resize() {
-        w = canvas.width = window.innerWidth;
-        h = canvas.height = window.innerHeight * 3;
-      }
-      resize();
-      window.addEventListener('resize', resize);
-
-      const isMobile = window.innerWidth < 768;
-      const TOTAL = isMobile ? 40 : 80;
-
-      for (let i = 0; i < TOTAL; i++) {
-        particles.push({
-          x: Math.random() * w,
-          y: Math.random() * h,
-          r: Math.random() * 2.5 + 0.5,
-          dx: (Math.random() - 0.5) * 0.3,
-          dy: (Math.random() - 0.5) * 0.15,
-          color: Math.random() > 0.5 ? 'rgba(252,131,55,' : 'rgba(139,92,246,',
-          baseAlpha: Math.random() * 0.35 + 0.1,
-          phase: Math.random() * Math.PI * 2
-        });
-      }
-
-      document.addEventListener('mousemove', e => {
-        mouse.x = e.clientX;
-        mouse.y = e.clientY + window.scrollY;
-      });
-
-      function draw(t) {
-        ctx.clearRect(0, 0, w, h);
-        const scrollY = window.scrollY;
-
-        for (const p of particles) {
-          p.x += p.dx;
-          p.y += p.dy;
-          if (p.x < 0) p.x = w;
-          if (p.x > w) p.x = 0;
-          if (p.y < 0) p.y = h;
-          if (p.y > h) p.y = 0;
-
-          const pulse = Math.sin(t * 0.001 + p.phase) * 0.15 + 0.85;
-          const alpha = p.baseAlpha * pulse;
-
-          const dx = mouse.x - p.x;
-          const dy = mouse.y - p.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          const glow = dist < 200 ? (1 - dist / 200) * 0.5 : 0;
-
-          ctx.beginPath();
-          ctx.arc(p.x, p.y - scrollY * 0.15, p.r + glow * 3, 0, Math.PI * 2);
-          ctx.fillStyle = p.color + Math.min(alpha + glow, 0.7) + ')';
-          ctx.fill();
-        }
-
-        requestAnimationFrame(draw);
-      }
-      requestAnimationFrame(draw);
-    })();
-
-    // ── 3D tilt effect on cards + radial glow tracking ──
-    (function() {
-      const tiltCards = document.querySelectorAll('.game-card, .service-card, .tech-card, .testimonial-card, .team-card');
-      const isMobile = window.innerWidth < 768;
-      if (isMobile) return;
-
-      tiltCards.forEach(card => {
+    // ── Gentle card tilt on hover ──
+    if (!isMobile) {
+      document.querySelectorAll('.game-card, .service-card, .tech-card, .testimonial-card, .team-card').forEach(card => {
         card.addEventListener('mousemove', e => {
-          const rect = card.getBoundingClientRect();
-          const x = (e.clientX - rect.left) / rect.width;
-          const y = (e.clientY - rect.top) / rect.height;
-          const rotX = (0.5 - y) * 12;
-          const rotY = (x - 0.5) * 12;
-          card.style.transform = `perspective(800px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale3d(1.02,1.02,1.02)`;
+          const r = card.getBoundingClientRect();
+          const x = (e.clientX - r.left) / r.width;
+          const y = (e.clientY - r.top) / r.height;
+          card.style.transform = `perspective(600px) rotateX(${(0.5 - y) * 8}deg) rotateY(${(x - 0.5) * 8}deg) translateY(-4px)`;
           card.style.setProperty('--mx', (x * 100) + '%');
           card.style.setProperty('--my', (y * 100) + '%');
         });
-
         card.addEventListener('mouseleave', () => {
-          card.style.transform = 'perspective(800px) rotateX(0) rotateY(0) scale3d(1,1,1)';
+          card.style.transform = '';
         });
       });
-    })();
+    }
 
-    // ── Parallax depth on scroll ──
-    (function() {
-      const hero = document.querySelector('.hero');
+    // ── Smooth parallax on hero ──
+    if (!isMobile) {
       const heroBg = document.querySelector('.hero-bg');
       const heroContent = document.querySelector('.hero-content');
-      const statsBar = document.querySelector('.stats-bar');
-      const isMobile = window.innerWidth < 768;
-      if (isMobile) return;
-
       let ticking = false;
       window.addEventListener('scroll', () => {
         if (!ticking) {
           requestAnimationFrame(() => {
-            const scrollY = window.scrollY;
-            if (heroBg) heroBg.style.transform = `translateY(${scrollY * 0.35}px)`;
-            if (heroContent) heroContent.style.transform = `translateY(${scrollY * 0.15}px)`;
-            if (statsBar) {
-              const rect = statsBar.getBoundingClientRect();
-              if (rect.top < window.innerHeight && rect.bottom > 0) {
-                const offset = (window.innerHeight - rect.top) * 0.03;
-                statsBar.style.transform = `translateY(${-offset}px)`;
-              }
-            }
+            const s = window.scrollY;
+            if (heroBg) heroBg.style.transform = `translateY(${s * 0.3}px)`;
+            if (heroContent) heroContent.style.transform = `translateY(${s * 0.12}px)`;
             ticking = false;
           });
           ticking = true;
         }
       }, { passive: true });
-    })();
+    }
 
-    // ── Floating game thumbnails marquee in hero ──
+    // ── Game thumbnails marquee ──
     (function() {
       const marquee = document.querySelector('.hero-marquee');
       if (!marquee) return;
-      let pos = 0;
-      const speed = 0.4;
       const inner = marquee.querySelector('.hero-marquee-inner');
       if (!inner) return;
       inner.innerHTML += inner.innerHTML;
       const totalW = inner.scrollWidth / 2;
-
-      function animate() {
-        pos -= speed;
+      let pos = 0;
+      function run() {
+        pos -= 0.4;
         if (pos <= -totalW) pos = 0;
         inner.style.transform = `translate3d(${pos}px, 0, 0)`;
-        requestAnimationFrame(animate);
+        requestAnimationFrame(run);
       }
-      requestAnimationFrame(animate);
-    })();
-
-    // ── Scroll-driven 3D rotations on sections ──
-    (function() {
-      if (window.innerWidth < 768) return;
-      const elements = document.querySelectorAll('.section-header, .cta-inner, .timeline');
-      let ticking = false;
-
-      window.addEventListener('scroll', () => {
-        if (ticking) return;
-        ticking = true;
-        requestAnimationFrame(() => {
-          elements.forEach(el => {
-            const rect = el.getBoundingClientRect();
-            const center = rect.top + rect.height / 2;
-            const viewCenter = window.innerHeight / 2;
-            const diff = (center - viewCenter) / window.innerHeight;
-            const rotX = diff * 6;
-            const scale = 1 - Math.abs(diff) * 0.04;
-            el.style.transform = `perspective(1200px) rotateX(${rotX}deg) scale(${Math.max(scale, 0.95)})`;
-          });
-          ticking = false;
-        });
-      }, { passive: true });
-    })();
-
-    // ── Mouse-following 3D glow blob ──
-    (function() {
-      if (window.innerWidth < 768) return;
-      const blob = document.createElement('div');
-      blob.className = 'mouse-blob';
-      blob.setAttribute('aria-hidden', 'true');
-      document.body.appendChild(blob);
-
-      let bx = -200, by = -200, tx = -200, ty = -200;
-      document.addEventListener('mousemove', e => {
-        tx = e.clientX;
-        ty = e.clientY;
-      });
-
-      function move() {
-        bx += (tx - bx) * 0.06;
-        by += (ty - by) * 0.06;
-        blob.style.transform = `translate(${bx - 200}px, ${by - 200}px) translate3d(0,0,0)`;
-        requestAnimationFrame(move);
-      }
-      requestAnimationFrame(move);
-    })();
-
-    // ── Game card inner parallax layers ──
-    (function() {
-      if (window.innerWidth < 768) return;
-      document.querySelectorAll('.game-card').forEach(card => {
-        const thumb = card.querySelector('.game-thumb img');
-        const info = card.querySelector('.game-info');
-        if (!thumb || !info) return;
-
-        card.addEventListener('mousemove', e => {
-          const rect = card.getBoundingClientRect();
-          const x = (e.clientX - rect.left) / rect.width - 0.5;
-          const y = (e.clientY - rect.top) / rect.height - 0.5;
-          thumb.style.transform = `scale(1.08) translate(${x * -12}px, ${y * -8}px)`;
-          info.style.transform = `translate(${x * 6}px, ${y * 4}px)`;
-        });
-
-        card.addEventListener('mouseleave', () => {
-          thumb.style.transform = '';
-          info.style.transform = '';
-        });
-      });
-    })();
-
-    // ── Magnetic buttons ──
-    (function() {
-      if (window.innerWidth < 768) return;
-      document.querySelectorAll('.btn').forEach(btn => {
-        btn.addEventListener('mousemove', e => {
-          const rect = btn.getBoundingClientRect();
-          const x = e.clientX - rect.left - rect.width / 2;
-          const y = e.clientY - rect.top - rect.height / 2;
-          btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px) scale(1.05)`;
-        });
-        btn.addEventListener('mouseleave', () => {
-          btn.style.transform = '';
-        });
-      });
+      requestAnimationFrame(run);
     })();
   </script>
 
