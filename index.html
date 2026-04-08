@@ -54,13 +54,6 @@
     <div class="hero-bg">
       <div class="hero-grid"></div>
     </div>
-    <div class="hero-shapes" aria-hidden="true">
-      <div class="shape shape-1"></div>
-      <div class="shape shape-2"></div>
-      <div class="shape shape-3"></div>
-      <div class="shape shape-4"></div>
-    </div>
-
     <div class="hero-content">
       <div class="hero-badge">
         <span class="dot"></span>
@@ -74,19 +67,6 @@
       </div>
     </div>
 
-    <div class="hero-marquee" aria-hidden="true">
-      <div class="hero-marquee-inner">
-        <img src="images/punchvrx.webp" alt="" width="140" height="88" loading="eager">
-        <img src="images/thunder-gladiator.webp" alt="" width="140" height="88" loading="eager">
-        <img src="images/bow-saber.webp" alt="" width="140" height="88" loading="eager">
-        <img src="images/prankster-cat.webp" alt="" width="140" height="88" loading="eager">
-        <img src="images/escape-the-nanny.webp" alt="" width="140" height="88" loading="eager">
-        <img src="images/grocery-store-tycoon.webp" alt="" width="140" height="88" loading="eager">
-        <img src="images/idle-farm.webp" alt="" width="140" height="88" loading="eager">
-        <img src="images/screw-puzzle.webp" alt="" width="140" height="88" loading="eager">
-        <img src="images/cat-sudoku.webp" alt="" width="140" height="88" loading="eager">
-      </div>
-    </div>
   </section>
 
   <!-- ==================== Stats ==================== -->
@@ -1109,63 +1089,6 @@
       });
     });
 
-    // ═══════════════════════════════════════════
-    //  SMOOTH 3D VISUAL EFFECTS
-    // ═══════════════════════════════════════════
-    const isMobile = window.innerWidth < 768;
-
-    // ── Gentle card tilt on hover ──
-    if (!isMobile) {
-      document.querySelectorAll('.game-card, .service-card, .tech-card, .testimonial-card, .team-card').forEach(card => {
-        card.addEventListener('mousemove', e => {
-          const r = card.getBoundingClientRect();
-          const x = (e.clientX - r.left) / r.width;
-          const y = (e.clientY - r.top) / r.height;
-          card.style.transform = `perspective(600px) rotateX(${(0.5 - y) * 8}deg) rotateY(${(x - 0.5) * 8}deg) translateY(-4px)`;
-          card.style.setProperty('--mx', (x * 100) + '%');
-          card.style.setProperty('--my', (y * 100) + '%');
-        });
-        card.addEventListener('mouseleave', () => {
-          card.style.transform = '';
-        });
-      });
-    }
-
-    // ── Smooth parallax on hero ──
-    if (!isMobile) {
-      const heroBg = document.querySelector('.hero-bg');
-      const heroContent = document.querySelector('.hero-content');
-      let ticking = false;
-      window.addEventListener('scroll', () => {
-        if (!ticking) {
-          requestAnimationFrame(() => {
-            const s = window.scrollY;
-            if (heroBg) heroBg.style.transform = `translateY(${s * 0.3}px)`;
-            if (heroContent) heroContent.style.transform = `translateY(${s * 0.12}px)`;
-            ticking = false;
-          });
-          ticking = true;
-        }
-      }, { passive: true });
-    }
-
-    // ── Game thumbnails marquee ──
-    (function() {
-      const marquee = document.querySelector('.hero-marquee');
-      if (!marquee) return;
-      const inner = marquee.querySelector('.hero-marquee-inner');
-      if (!inner) return;
-      inner.innerHTML += inner.innerHTML;
-      const totalW = inner.scrollWidth / 2;
-      let pos = 0;
-      function run() {
-        pos -= 0.4;
-        if (pos <= -totalW) pos = 0;
-        inner.style.transform = `translate3d(${pos}px, 0, 0)`;
-        requestAnimationFrame(run);
-      }
-      requestAnimationFrame(run);
-    })();
   </script>
 
 
