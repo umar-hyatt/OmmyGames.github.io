@@ -22,74 +22,12 @@
   <link rel="canonical" href="https://www.ommygames.com">
 
   <link rel="stylesheet" href="style.css">
-
-  <!-- Three.js Import Map (desktop 3D experience) -->
-  <script type="importmap">
-  {
-    "imports": {
-      "three": "https://cdn.jsdelivr.net/npm/three@0.168.0/build/three.module.js",
-      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.168.0/examples/jsm/"
-    }
-  }
-  </script>
 </head>
 
 <body>
 
-  <!-- ==================== 3D Loading Screen ==================== -->
-  <div id="loading-screen">
-    <div class="loader-content">
-      <img src="favicon.png" alt="Ommy Games" width="56" height="56" class="loader-logo">
-      <h2>Ommy Games</h2>
-      <p>Loading 3D Studio...</p>
-      <div class="loader-bar"><div id="load-progress"></div></div>
-      <span class="loader-hint">Best experienced on desktop</span>
-    </div>
-  </div>
-
-  <!-- ==================== 3D Canvas ==================== -->
-  <div id="site-3d">
-    <canvas id="canvas3d"></canvas>
-
-    <!-- HUD Overlay -->
-    <div id="hud">
-      <div class="crosshair"></div>
-      <div id="interact-prompt" class="interact-prompt"></div>
-      <div class="hud-controls">
-        <span><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> Move</span>
-        <span><kbd>Mouse</kbd> Look</span>
-        <span><kbd>Click</kbd> Interact</span>
-        <span><kbd>ESC</kbd> Release cursor</span>
-      </div>
-      <div class="hud-nav">
-        <span class="hud-label">← Games</span>
-        <span class="hud-label">Services ↑</span>
-        <span class="hud-label">Games →</span>
-        <span class="hud-label">About ↓</span>
-        <span class="hud-label">Contact ↗</span>
-      </div>
-      <button class="hud-exit" id="hud-exit-btn" title="Switch to 2D site">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
-        2D
-      </button>
-    </div>
-
-    <!-- Click to start prompt -->
-    <div id="click-prompt">
-      <div class="prompt-content">
-        <div class="prompt-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5"/></svg>
-        </div>
-        <h3>Click to Enter Studio</h3>
-        <p>Explore the 3D virtual studio with WASD + Mouse</p>
-        <span class="prompt-switch" id="switch-to-2d">or view 2D version →</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- ==================== 2D Site (mobile fallback + SEO) ==================== -->
-  <noscript><style>#site-2d{display:block!important}#site-3d,#loading-screen{display:none!important}</style></noscript>
-  <div id="site-2d" style="display:none">
+  <!-- Particle Canvas Background -->
+  <canvas id="particles-canvas"></canvas>
 
   <!-- ==================== Navigation ==================== -->
   <nav class="nav" id="nav">
@@ -119,6 +57,25 @@
     <div class="hero-bg">
       <div class="hero-grid"></div>
     </div>
+    <div class="hero-shapes" aria-hidden="true">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+      <div class="shape shape-4"></div>
+    </div>
+
+    <!-- 3D Rotating Game Cube -->
+    <div class="hero-cube-wrap" aria-hidden="true">
+      <div class="hero-cube">
+        <div class="cube-face cube-front"><img src="images/punchvrx.webp" alt="" width="180" height="180"></div>
+        <div class="cube-face cube-back"><img src="images/thunder-gladiator.webp" alt="" width="180" height="180"></div>
+        <div class="cube-face cube-right"><img src="images/bow-saber.webp" alt="" width="180" height="180"></div>
+        <div class="cube-face cube-left"><img src="images/prankster-cat.webp" alt="" width="180" height="180"></div>
+        <div class="cube-face cube-top"><img src="images/escape-the-nanny.webp" alt="" width="180" height="180"></div>
+        <div class="cube-face cube-bottom"><img src="images/screw-puzzle.webp" alt="" width="180" height="180"></div>
+      </div>
+    </div>
+
     <div class="hero-content">
       <div class="hero-badge">
         <span class="dot"></span>
@@ -129,6 +86,20 @@
       <div class="hero-actions">
         <a href="#games" class="btn btn-primary">Explore Our Games</a>
         <a href="#services" class="btn btn-outline">Our Services</a>
+      </div>
+    </div>
+
+    <div class="hero-marquee" aria-hidden="true">
+      <div class="hero-marquee-inner">
+        <img src="images/punchvrx.webp" alt="" width="140" height="88" loading="eager">
+        <img src="images/thunder-gladiator.webp" alt="" width="140" height="88" loading="eager">
+        <img src="images/bow-saber.webp" alt="" width="140" height="88" loading="eager">
+        <img src="images/prankster-cat.webp" alt="" width="140" height="88" loading="eager">
+        <img src="images/escape-the-nanny.webp" alt="" width="140" height="88" loading="eager">
+        <img src="images/grocery-store-tycoon.webp" alt="" width="140" height="88" loading="eager">
+        <img src="images/idle-farm.webp" alt="" width="140" height="88" loading="eager">
+        <img src="images/screw-puzzle.webp" alt="" width="140" height="88" loading="eager">
+        <img src="images/cat-sudoku.webp" alt="" width="140" height="88" loading="eager">
       </div>
     </div>
   </section>
@@ -252,6 +223,11 @@
       </div>
     </div>
   </section>
+
+  <!-- ==================== Section Divider ==================== -->
+  <div class="section-divider" aria-hidden="true">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,80 L0,40 Q360,0 720,40 Q1080,80 1440,40 L1440,80 Z" fill="var(--surface)"/></svg>
+  </div>
 
   <!-- ==================== Games ==================== -->
   <section id="games" class="bg-alt">
@@ -565,6 +541,10 @@
     </div>
   </section>
 
+  <div class="section-divider flip" aria-hidden="true">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,0 L0,40 Q360,80 720,40 Q1080,0 1440,40 L1440,0 Z" fill="var(--surface)"/></svg>
+  </div>
+
   <!-- ==================== Services ==================== -->
   <section id="services">
     <div class="container">
@@ -706,6 +686,14 @@
 
   <!-- ==================== Tech Stack ==================== -->
   <section id="tech" class="bg-alt">
+    <div class="orbit-bg" aria-hidden="true">
+      <div class="orbit-ring orbit-ring-1"></div>
+      <div class="orbit-ring orbit-ring-2"></div>
+      <div class="orbit-ring orbit-ring-3"></div>
+      <div class="orbit-dot orbit-dot-1"></div>
+      <div class="orbit-dot orbit-dot-2"></div>
+      <div class="orbit-dot orbit-dot-3"></div>
+    </div>
     <div class="container">
       <div class="section-header reveal">
         <span class="section-label">Technology</span>
@@ -1043,7 +1031,7 @@
   </button>
 
   <script>
-    // Mobile menu toggle
+    // ── Mobile menu toggle ──
     const toggle = document.getElementById('navToggle');
     const links  = document.getElementById('navLinks');
     toggle.addEventListener('click', () => {
@@ -1057,7 +1045,7 @@
       })
     );
 
-    // Navbar background on scroll + back-to-top visibility
+    // ── Navbar scroll + back-to-top ──
     const nav = document.getElementById('nav');
     const backToTop = document.getElementById('backToTop');
     window.addEventListener('scroll', () => {
@@ -1066,13 +1054,11 @@
     }, { passive: true });
     backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-    // Staggered reveal for grid children
-    function applyStagger(gridSelector) {
-      document.querySelectorAll(gridSelector).forEach(grid => {
+    // ── Staggered reveal ──
+    function applyStagger(sel) {
+      document.querySelectorAll(sel).forEach(grid => {
         Array.from(grid.children).forEach((child, i) => {
-          if (child.classList.contains('reveal')) {
-            child.style.transitionDelay = (i * 0.08) + 's';
-          }
+          if (child.classList.contains('reveal')) child.style.transitionDelay = (i * 0.08) + 's';
         });
       });
     }
@@ -1081,84 +1067,71 @@
     applyStagger('.tech-grid');
     applyStagger('.process-track');
 
-    // Scroll reveal (IntersectionObserver)
+    // ── Scroll reveal ──
     const observer = new IntersectionObserver(
       entries => entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          observer.unobserve(e.target);
-        }
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
       }),
       { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
     );
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // Animated stat counters
+    // ── Animated stat counters ──
     function animateCounter(el) {
       const text = el.textContent.trim();
       const hasPlus = text.includes('+');
       const num = parseInt(text.replace(/[^0-9]/g, ''), 10);
       if (isNaN(num) || num === 0) return;
-      const duration = 1800;
-      const start = performance.now();
+      const duration = 1800, start = performance.now();
       el.textContent = hasPlus ? '0+' : '0';
       function tick(now) {
-        const elapsed = now - start;
-        const progress = Math.min(elapsed / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        const current = Math.round(eased * num);
-        el.textContent = hasPlus ? current + '+' : String(current);
-        if (progress < 1) requestAnimationFrame(tick);
+        const p = Math.min((now - start) / duration, 1);
+        const v = Math.round((1 - Math.pow(1 - p, 3)) * num);
+        el.textContent = hasPlus ? v + '+' : String(v);
+        if (p < 1) requestAnimationFrame(tick);
       }
       requestAnimationFrame(tick);
     }
-    const counterObserver = new IntersectionObserver(entries => {
+    const counterObs = new IntersectionObserver(entries => {
       entries.forEach(e => {
         if (e.isIntersecting) {
           e.target.querySelectorAll('.stat-number, .highlight-number').forEach(animateCounter);
-          counterObserver.unobserve(e.target);
+          counterObs.unobserve(e.target);
         }
       });
     }, { threshold: 0.3 });
-    document.querySelectorAll('.stats-bar, .story-highlights').forEach(el => counterObserver.observe(el));
+    document.querySelectorAll('.stats-bar, .story-highlights').forEach(el => counterObs.observe(el));
 
-    // Scroll-spy active nav highlighting
+    // ── Scroll-spy ──
     const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
-    const spyObserver = new IntersectionObserver(entries => {
+    const navLinksAll = document.querySelectorAll('.nav-links a[href^="#"]');
+    const spyObs = new IntersectionObserver(entries => {
       entries.forEach(e => {
         if (e.isIntersecting) {
           const id = e.target.getAttribute('id');
-          navLinks.forEach(link => {
-            link.classList.toggle('active', link.getAttribute('href') === '#' + id);
-          });
+          navLinksAll.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
         }
       });
     }, { rootMargin: '-20% 0px -60% 0px' });
-    sections.forEach(s => spyObserver.observe(s));
+    sections.forEach(s => spyObs.observe(s));
 
-    // Game filter tabs
+    // ── Game filter tabs ──
     const filterBtns = document.querySelectorAll('.filter-btn');
     const gameCards  = document.querySelectorAll('.game-card[data-platform]');
-
     filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         filterBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-
-        const filter = btn.dataset.filter;
+        const f = btn.dataset.filter;
         gameCards.forEach(card => {
-          const platforms = card.dataset.platform;
-          const show = filter === 'all' || platforms.includes(filter);
+          const show = f === 'all' || card.dataset.platform.includes(f);
           card.classList.toggle('hidden', !show);
-          if (show && !card.classList.contains('visible')) {
-            card.classList.add('visible');
-          }
+          if (show && !card.classList.contains('visible')) card.classList.add('visible');
         });
       });
     });
 
-    // FAQ accordion
+    // ── FAQ accordion ──
     document.querySelectorAll('.faq-question').forEach(btn => {
       btn.addEventListener('click', () => {
         const item = btn.parentElement;
@@ -1167,52 +1140,238 @@
         if (!isOpen) item.classList.add('open');
       });
     });
-  </script>
 
-  </div><!-- end #site-2d -->
+    // ═══════════════════════════════════════════
+    //  3D VISUAL EFFECTS
+    // ═══════════════════════════════════════════
 
-  <!-- ==================== Device Detection & 3D Loader ==================== -->
-  <script>
+    // ── Floating particle canvas background ──
     (function() {
-      const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent) || screen.width < 768;
-      const site2d = document.getElementById('site-2d');
-      const site3d = document.getElementById('site-3d');
-      const loadScreen = document.getElementById('loading-screen');
+      const canvas = document.getElementById('particles-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let w, h, particles = [], mouse = { x: -1000, y: -1000 };
 
-      if (isMobile) {
-        site2d.style.display = '';
-        site3d.style.display = 'none';
-        loadScreen.style.display = 'none';
-      } else {
-        site2d.style.display = 'none';
-        site3d.style.display = '';
-        loadScreen.style.display = '';
+      function resize() {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight * 3;
+      }
+      resize();
+      window.addEventListener('resize', resize);
 
-        var s = document.createElement('script');
-        s.type = 'module';
-        s.src = 'js/main.js';
-        s.onerror = function() { switchTo2D(); };
-        document.body.appendChild(s);
+      const isMobile = window.innerWidth < 768;
+      const TOTAL = isMobile ? 40 : 80;
 
-        // Fallback: if 3D doesn't initialize within 10s, show 2D
-        setTimeout(function() {
-          if (!window.__3d_ready) {
-            console.warn('3D took too long, falling back to 2D');
-            switchTo2D();
-          }
-        }, 10000);
+      for (let i = 0; i < TOTAL; i++) {
+        particles.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          r: Math.random() * 2.5 + 0.5,
+          dx: (Math.random() - 0.5) * 0.3,
+          dy: (Math.random() - 0.5) * 0.15,
+          color: Math.random() > 0.5 ? 'rgba(252,131,55,' : 'rgba(139,92,246,',
+          baseAlpha: Math.random() * 0.35 + 0.1,
+          phase: Math.random() * Math.PI * 2
+        });
       }
 
-      function switchTo2D() {
-        site3d.style.display = 'none';
-        site2d.style.display = '';
-        loadScreen.style.display = 'none';
-        if (document.pointerLockElement) document.exitPointerLock();
+      document.addEventListener('mousemove', e => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY + window.scrollY;
+      });
+
+      function draw(t) {
+        ctx.clearRect(0, 0, w, h);
+        const scrollY = window.scrollY;
+
+        for (const p of particles) {
+          p.x += p.dx;
+          p.y += p.dy;
+          if (p.x < 0) p.x = w;
+          if (p.x > w) p.x = 0;
+          if (p.y < 0) p.y = h;
+          if (p.y > h) p.y = 0;
+
+          const pulse = Math.sin(t * 0.001 + p.phase) * 0.15 + 0.85;
+          const alpha = p.baseAlpha * pulse;
+
+          const dx = mouse.x - p.x;
+          const dy = mouse.y - p.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          const glow = dist < 200 ? (1 - dist / 200) * 0.5 : 0;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y - scrollY * 0.15, p.r + glow * 3, 0, Math.PI * 2);
+          ctx.fillStyle = p.color + Math.min(alpha + glow, 0.7) + ')';
+          ctx.fill();
+        }
+
+        requestAnimationFrame(draw);
       }
-      document.getElementById('switch-to-2d')?.addEventListener('click', switchTo2D);
-      document.getElementById('hud-exit-btn')?.addEventListener('click', switchTo2D);
+      requestAnimationFrame(draw);
+    })();
+
+    // ── 3D tilt effect on cards + radial glow tracking ──
+    (function() {
+      const tiltCards = document.querySelectorAll('.game-card, .service-card, .tech-card, .testimonial-card, .team-card');
+      const isMobile = window.innerWidth < 768;
+      if (isMobile) return;
+
+      tiltCards.forEach(card => {
+        card.addEventListener('mousemove', e => {
+          const rect = card.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width;
+          const y = (e.clientY - rect.top) / rect.height;
+          const rotX = (0.5 - y) * 12;
+          const rotY = (x - 0.5) * 12;
+          card.style.transform = `perspective(800px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale3d(1.02,1.02,1.02)`;
+          card.style.setProperty('--mx', (x * 100) + '%');
+          card.style.setProperty('--my', (y * 100) + '%');
+        });
+
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'perspective(800px) rotateX(0) rotateY(0) scale3d(1,1,1)';
+        });
+      });
+    })();
+
+    // ── Parallax depth on scroll ──
+    (function() {
+      const hero = document.querySelector('.hero');
+      const heroBg = document.querySelector('.hero-bg');
+      const heroContent = document.querySelector('.hero-content');
+      const statsBar = document.querySelector('.stats-bar');
+      const isMobile = window.innerWidth < 768;
+      if (isMobile) return;
+
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            const scrollY = window.scrollY;
+            if (heroBg) heroBg.style.transform = `translateY(${scrollY * 0.35}px)`;
+            if (heroContent) heroContent.style.transform = `translateY(${scrollY * 0.15}px)`;
+            if (statsBar) {
+              const rect = statsBar.getBoundingClientRect();
+              if (rect.top < window.innerHeight && rect.bottom > 0) {
+                const offset = (window.innerHeight - rect.top) * 0.03;
+                statsBar.style.transform = `translateY(${-offset}px)`;
+              }
+            }
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }, { passive: true });
+    })();
+
+    // ── Floating game thumbnails marquee in hero ──
+    (function() {
+      const marquee = document.querySelector('.hero-marquee');
+      if (!marquee) return;
+      let pos = 0;
+      const speed = 0.4;
+      const inner = marquee.querySelector('.hero-marquee-inner');
+      if (!inner) return;
+      inner.innerHTML += inner.innerHTML;
+      const totalW = inner.scrollWidth / 2;
+
+      function animate() {
+        pos -= speed;
+        if (pos <= -totalW) pos = 0;
+        inner.style.transform = `translate3d(${pos}px, 0, 0)`;
+        requestAnimationFrame(animate);
+      }
+      requestAnimationFrame(animate);
+    })();
+
+    // ── Scroll-driven 3D rotations on sections ──
+    (function() {
+      if (window.innerWidth < 768) return;
+      const elements = document.querySelectorAll('.section-header, .cta-inner, .timeline');
+      let ticking = false;
+
+      window.addEventListener('scroll', () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          elements.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            const center = rect.top + rect.height / 2;
+            const viewCenter = window.innerHeight / 2;
+            const diff = (center - viewCenter) / window.innerHeight;
+            const rotX = diff * 6;
+            const scale = 1 - Math.abs(diff) * 0.04;
+            el.style.transform = `perspective(1200px) rotateX(${rotX}deg) scale(${Math.max(scale, 0.95)})`;
+          });
+          ticking = false;
+        });
+      }, { passive: true });
+    })();
+
+    // ── Mouse-following 3D glow blob ──
+    (function() {
+      if (window.innerWidth < 768) return;
+      const blob = document.createElement('div');
+      blob.className = 'mouse-blob';
+      blob.setAttribute('aria-hidden', 'true');
+      document.body.appendChild(blob);
+
+      let bx = -200, by = -200, tx = -200, ty = -200;
+      document.addEventListener('mousemove', e => {
+        tx = e.clientX;
+        ty = e.clientY;
+      });
+
+      function move() {
+        bx += (tx - bx) * 0.06;
+        by += (ty - by) * 0.06;
+        blob.style.transform = `translate(${bx - 200}px, ${by - 200}px) translate3d(0,0,0)`;
+        requestAnimationFrame(move);
+      }
+      requestAnimationFrame(move);
+    })();
+
+    // ── Game card inner parallax layers ──
+    (function() {
+      if (window.innerWidth < 768) return;
+      document.querySelectorAll('.game-card').forEach(card => {
+        const thumb = card.querySelector('.game-thumb img');
+        const info = card.querySelector('.game-info');
+        if (!thumb || !info) return;
+
+        card.addEventListener('mousemove', e => {
+          const rect = card.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width - 0.5;
+          const y = (e.clientY - rect.top) / rect.height - 0.5;
+          thumb.style.transform = `scale(1.08) translate(${x * -12}px, ${y * -8}px)`;
+          info.style.transform = `translate(${x * 6}px, ${y * 4}px)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+          thumb.style.transform = '';
+          info.style.transform = '';
+        });
+      });
+    })();
+
+    // ── Magnetic buttons ──
+    (function() {
+      if (window.innerWidth < 768) return;
+      document.querySelectorAll('.btn').forEach(btn => {
+        btn.addEventListener('mousemove', e => {
+          const rect = btn.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px) scale(1.05)`;
+        });
+        btn.addEventListener('mouseleave', () => {
+          btn.style.transform = '';
+        });
+      });
     })();
   </script>
+
 
 </body>
 </html>
