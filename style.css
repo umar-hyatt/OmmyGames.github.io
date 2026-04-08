@@ -1665,6 +1665,383 @@ section { padding: 6rem 1.5rem; }
 }
 
 /* ============================================
+   3D Experience — Loading Screen
+   ============================================ */
+#loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+#loading-screen.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.loader-content {
+  text-align: center;
+  color: var(--text);
+}
+.loader-logo {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  margin-bottom: 1.25rem;
+  animation: pulse3d 1.5s ease-in-out infinite;
+}
+@keyframes pulse3d {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.08); opacity: 0.8; }
+}
+.loader-content h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+.loader-content p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+.loader-bar {
+  width: 200px;
+  height: 3px;
+  background: var(--surface-2);
+  border-radius: 4px;
+  margin: 0 auto 1rem;
+  overflow: hidden;
+}
+#load-progress {
+  height: 100%;
+  width: 30%;
+  background: linear-gradient(90deg, var(--accent), var(--purple));
+  border-radius: 4px;
+  animation: loadPulse 1.5s ease-in-out infinite;
+}
+@keyframes loadPulse {
+  0%   { width: 20%; }
+  50%  { width: 80%; }
+  100% { width: 20%; }
+}
+.loader-hint {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  opacity: 0.5;
+}
+
+/* ============================================
+   3D Experience — Canvas & Site Wrappers
+   ============================================ */
+#site-3d {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+}
+#site-3d canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ============================================
+   3D Experience — HUD
+   ============================================ */
+#hud {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+#hud.active { opacity: 1; }
+
+.crosshair {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+}
+.crosshair::before, .crosshair::after {
+  content: '';
+  position: absolute;
+  background: rgba(255,255,255,0.5);
+  border-radius: 1px;
+}
+.crosshair::before {
+  width: 2px;
+  height: 20px;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+}
+.crosshair::after {
+  width: 20px;
+  height: 2px;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.interact-prompt {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform: translate(-50%, 40px);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--accent);
+  background: rgba(6,6,8,0.75);
+  padding: 0.4rem 1rem;
+  border-radius: 50px;
+  border: 1px solid rgba(252,131,55,0.25);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  white-space: nowrap;
+}
+.interact-prompt.visible { opacity: 1; }
+
+.hud-controls {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.35);
+}
+.hud-controls kbd {
+  display: inline-block;
+  padding: 0.15rem 0.4rem;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 0.68rem;
+  font-weight: 600;
+  margin-right: 0.2rem;
+}
+
+.hud-nav {
+  position: absolute;
+  top: 50%;
+  left: 1.5rem;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.hud-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.2);
+}
+
+.hud-exit {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.85rem;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  color: rgba(255,255,255,0.4);
+  font-family: inherit;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: background 0.2s, color 0.2s;
+}
+.hud-exit:hover { background: rgba(255,255,255,0.12); color: var(--text); }
+.hud-exit svg { width: 14px; height: 14px; }
+
+/* ============================================
+   3D Experience — Click Prompt
+   ============================================ */
+#click-prompt {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(6,6,8,0.6);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+#click-prompt.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.prompt-content {
+  text-align: center;
+  max-width: 320px;
+}
+.prompt-icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-glow);
+  border: 1px solid rgba(252,131,55,0.2);
+  border-radius: 50%;
+  color: var(--accent);
+}
+.prompt-icon svg { width: 24px; height: 24px; }
+
+.prompt-content h3 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+.prompt-content p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.25rem;
+}
+.prompt-switch {
+  font-size: 0.8rem;
+  color: var(--accent);
+  cursor: pointer;
+  transition: color 0.2s;
+  pointer-events: auto;
+}
+.prompt-switch:hover { color: var(--accent-light); }
+
+/* ============================================
+   3D Experience — Detail Overlays
+   ============================================ */
+.detail-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(6,6,8,0.55);
+  backdrop-filter: blur(8px);
+  animation: fadeIn3d 0.2s ease;
+}
+@keyframes fadeIn3d {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.detail-card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2.25rem;
+  max-width: 420px;
+  width: 90%;
+  animation: slideUp3d 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes slideUp3d {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.detail-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: color 0.2s;
+  pointer-events: auto;
+}
+.detail-close:hover { color: var(--text); }
+
+.detail-card h2 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin-bottom: 0.65rem;
+}
+.detail-card p {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
+.detail-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+.detail-tag {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.2rem 0.6rem;
+  border-radius: 50px;
+  background: var(--accent-glow);
+  color: var(--accent);
+}
+.detail-tag.vr {
+  background: rgba(139,92,246,0.15);
+  color: var(--purple);
+}
+.detail-rating {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #fbbf24;
+}
+.detail-store {
+  margin-top: 1rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+.detail-label {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+.terminal-info p {
+  margin: 0.5rem 0;
+  font-family: monospace;
+  font-size: 0.9rem;
+  color: #88ffbb;
+}
+.detail-cta {
+  display: inline-block;
+  margin-top: 1.25rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.detail-cta:hover { color: var(--accent-light); }
+
+/* ============================================
    Responsive
    ============================================ */
 @media (max-width: 1024px) {

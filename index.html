@@ -22,9 +22,74 @@
   <link rel="canonical" href="https://www.ommygames.com">
 
   <link rel="stylesheet" href="style.css">
+
+  <!-- Three.js Import Map (desktop 3D experience) -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.168.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.168.0/examples/jsm/"
+    }
+  }
+  </script>
 </head>
 
 <body>
+
+  <!-- ==================== 3D Loading Screen ==================== -->
+  <div id="loading-screen">
+    <div class="loader-content">
+      <img src="favicon.png" alt="Ommy Games" width="56" height="56" class="loader-logo">
+      <h2>Ommy Games</h2>
+      <p>Loading 3D Studio...</p>
+      <div class="loader-bar"><div id="load-progress"></div></div>
+      <span class="loader-hint">Best experienced on desktop</span>
+    </div>
+  </div>
+
+  <!-- ==================== 3D Canvas ==================== -->
+  <div id="site-3d">
+    <canvas id="canvas3d"></canvas>
+
+    <!-- HUD Overlay -->
+    <div id="hud">
+      <div class="crosshair"></div>
+      <div id="interact-prompt" class="interact-prompt"></div>
+      <div class="hud-controls">
+        <span><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> Move</span>
+        <span><kbd>Mouse</kbd> Look</span>
+        <span><kbd>Click</kbd> Interact</span>
+        <span><kbd>ESC</kbd> Release cursor</span>
+      </div>
+      <div class="hud-nav">
+        <span class="hud-label">← Games</span>
+        <span class="hud-label">Services ↑</span>
+        <span class="hud-label">Games →</span>
+        <span class="hud-label">About ↓</span>
+        <span class="hud-label">Contact ↗</span>
+      </div>
+      <button class="hud-exit" id="hud-exit-btn" title="Switch to 2D site">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+        2D
+      </button>
+    </div>
+
+    <!-- Click to start prompt -->
+    <div id="click-prompt">
+      <div class="prompt-content">
+        <div class="prompt-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5"/></svg>
+        </div>
+        <h3>Click to Enter Studio</h3>
+        <p>Explore the 3D virtual studio with WASD + Mouse</p>
+        <span class="prompt-switch" id="switch-to-2d">or view 2D version →</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 2D Site (mobile fallback + SEO) ==================== -->
+  <noscript><style>#site-2d{display:block!important}#site-3d,#loading-screen{display:none!important}</style></noscript>
+  <div id="site-2d" style="display:none">
 
   <!-- ==================== Navigation ==================== -->
   <nav class="nav" id="nav">
@@ -1102,6 +1167,51 @@
         if (!isOpen) item.classList.add('open');
       });
     });
+  </script>
+
+  </div><!-- end #site-2d -->
+
+  <!-- ==================== Device Detection & 3D Loader ==================== -->
+  <script>
+    (function() {
+      const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent) || window.innerWidth < 1024;
+      const site2d = document.getElementById('site-2d');
+      const site3d = document.getElementById('site-3d');
+      const loadScreen = document.getElementById('loading-screen');
+
+      if (isMobile) {
+        site2d.style.display = '';
+        site3d.style.display = 'none';
+        loadScreen.style.display = 'none';
+      } else {
+        site2d.style.display = 'none';
+        site3d.style.display = '';
+        loadScreen.style.display = '';
+
+        var s = document.createElement('script');
+        s.type = 'module';
+        s.src = 'js/main.js';
+        s.onerror = function() { switchTo2D(); };
+        document.body.appendChild(s);
+
+        // Fallback: if 3D doesn't initialize within 10s, show 2D
+        setTimeout(function() {
+          if (!window.__3d_ready) {
+            console.warn('3D took too long, falling back to 2D');
+            switchTo2D();
+          }
+        }, 10000);
+      }
+
+      function switchTo2D() {
+        site3d.style.display = 'none';
+        site2d.style.display = '';
+        loadScreen.style.display = 'none';
+        if (document.pointerLockElement) document.exitPointerLock();
+      }
+      document.getElementById('switch-to-2d')?.addEventListener('click', switchTo2D);
+      document.getElementById('hud-exit-btn')?.addEventListener('click', switchTo2D);
+    })();
   </script>
 
 </body>
