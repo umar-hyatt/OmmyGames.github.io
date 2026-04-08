@@ -1,490 +1,1108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Ommy Games — Immersive Mobile &amp; VR Experiences</title>
-    <meta name="description" content="At Ommy Games, we create exciting games that take you to new worlds. Our team is passionate about making fun and memorable experiences using the latest technology.">
-    <meta property="og:title" content="Ommy Games">
-    <meta property="og:description" content="At Ommy Games, we create exciting games that take you to new worlds. Our team is passionate about making fun and memorable experiences using the latest technology.">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="https://cdn.gamma.app/g9zq6ghchocd3l4/1648c8ba67de49b99004d5238320b23a/original/New-Project.png">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Ommy Games">
-    <meta name="twitter:description" content="At Ommy Games, we create exciting games that take you to new worlds. Our team is passionate about making fun and memorable experiences using the latest technology.">
-    <meta name="twitter:image" content="https://cdn.gamma.app/g9zq6ghchocd3l4/1648c8ba67de49b99004d5238320b23a/original/New-Project.png">
-    <link rel="icon" href="cdn.gamma.app/g9zq6ghchocd3l4/1648c8ba67de49b99004d5238320b23a/original/New-Project.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-    <style>
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        :root {
-            --bg: #0c0c0c;
-            --surface: #161616;
-            --surface-hover: #1e1e1e;
-            --border: #252525;
-            --text: #e8e8e8;
-            --text-muted: #999;
-            --accent: #FC8337;
-            --accent-glow: rgba(252, 131, 55, .15);
-            --radius: 12px;
-        }
+  <title>Ommy Games — Immersive Mobile &amp; VR Experiences</title>
+  <meta name="description" content="Ommy Games is a game studio specializing in mobile and VR development. We craft immersive experiences using Unity, WebGL, and Meta Quest — from concept to launch.">
 
-        html { scroll-behavior: smooth; }
+  <!-- Open Graph -->
+  <meta property="og:title"       content="Ommy Games — Immersive Mobile & VR Experiences">
+  <meta property="og:description" content="Ommy Games is a game studio specializing in mobile and VR development. We craft immersive experiences using Unity, WebGL, and Meta Quest.">
+  <meta property="og:type"        content="website">
+  <meta property="og:url"         content="https://www.ommygames.com">
+  <meta property="og:image"       content="images/about-studio.webp">
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="Ommy Games — Immersive Mobile & VR Experiences">
+  <meta name="twitter:description" content="Ommy Games is a game studio specializing in mobile and VR development.">
+  <meta name="twitter:image"       content="images/about-studio.webp">
 
-        body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-        }
+  <link rel="icon" href="favicon.png">
+  <link rel="canonical" href="https://www.ommygames.com">
 
-        a { color: var(--accent); text-decoration: none; transition: opacity .2s; }
-        a:hover { opacity: .8; }
-
-        img { display: block; max-width: 100%; height: auto; }
-
-        /* NAV */
-        .nav {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-            background: rgba(12,12,12,.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border);
-        }
-        .nav-inner {
-            max-width: 1200px; margin: 0 auto;
-            display: flex; align-items: center; justify-content: space-between;
-            padding: .75rem 1.5rem;
-        }
-        .nav-logo { display: flex; align-items: center; gap: .6rem; font-weight: 800; font-size: 1.15rem; }
-        .nav-logo img { width: 36px; height: 36px; border-radius: 8px; }
-        .nav-links { display: flex; gap: 1.75rem; list-style: none; }
-        .nav-links a { color: var(--text-muted); font-size: .9rem; font-weight: 500; transition: color .2s; }
-        .nav-links a:hover { color: var(--text); opacity: 1; }
-
-        /* HERO */
-        .hero {
-            min-height: 100vh;
-            display: flex; align-items: center; justify-content: center;
-            text-align: center;
-            padding: 6rem 1.5rem 4rem;
-            background: radial-gradient(ellipse at 50% 0%, var(--accent-glow) 0%, transparent 60%);
-        }
-        .hero-content { max-width: 720px; }
-        .hero h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 900; line-height: 1.1; margin-bottom: 1.25rem; }
-        .hero h1 .accent { color: var(--accent); }
-        .hero p { font-size: 1.15rem; color: var(--text-muted); max-width: 560px; margin: 0 auto 2rem; }
-        .hero-cta {
-            display: inline-flex; align-items: center; gap: .5rem;
-            background: var(--accent); color: #fff; font-weight: 700;
-            padding: .85rem 2rem; border-radius: 50px; font-size: 1rem;
-            transition: transform .2s, box-shadow .2s;
-        }
-        .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px var(--accent-glow); opacity: 1; }
-
-        /* SECTIONS */
-        section { padding: 5rem 1.5rem; }
-        .container { max-width: 1200px; margin: 0 auto; }
-        .section-label {
-            display: inline-block; font-size: .75rem; font-weight: 700;
-            text-transform: uppercase; letter-spacing: .12em;
-            color: var(--accent); margin-bottom: .75rem;
-        }
-        .section-title { font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 800; line-height: 1.15; margin-bottom: 1rem; }
-        .section-desc { color: var(--text-muted); max-width: 640px; font-size: 1.05rem; margin-bottom: 3rem; }
-
-        /* ABOUT / STORY */
-        .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
-        .story-img {
-            border-radius: var(--radius); overflow: hidden;
-            aspect-ratio: 4/3; background: var(--surface);
-        }
-        .story-img img { width: 100%; height: 100%; object-fit: cover; }
-        .story-text p { color: var(--text-muted); margin-bottom: 1rem; font-size: 1.05rem; }
-        .story-text b { color: var(--text); }
-
-        /* GAMES GRID */
-        .games-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
-        .game-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            overflow: hidden;
-            transition: transform .25s, border-color .25s;
-        }
-        .game-card:hover { transform: translateY(-4px); border-color: var(--accent); }
-        .game-thumb {
-            aspect-ratio: 16/10; overflow: hidden; background: #111;
-        }
-        .game-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
-        .game-card:hover .game-thumb img { transform: scale(1.05); }
-        .game-info { padding: 1.25rem; }
-        .game-info h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: .4rem; }
-        .game-info p { font-size: .9rem; color: var(--text-muted); margin-bottom: .75rem; }
-        .game-tag {
-            display: inline-block; font-size: .7rem; font-weight: 600;
-            padding: .25rem .6rem; border-radius: 50px;
-            background: var(--accent-glow); color: var(--accent);
-        }
-        .game-link {
-            display: inline-flex; align-items: center; gap: .3rem;
-            font-size: .85rem; font-weight: 600; margin-left: .5rem;
-        }
-
-        /* TECH STACK */
-        .tech-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem; }
-        .tech-card {
-            background: var(--surface); border: 1px solid var(--border);
-            border-radius: var(--radius); padding: 1.5rem; text-align: center;
-            transition: border-color .25s;
-        }
-        .tech-card:hover { border-color: var(--accent); }
-        .tech-icon { font-size: 2rem; margin-bottom: .75rem; }
-        .tech-card h4 { font-size: .95rem; font-weight: 700; margin-bottom: .3rem; }
-        .tech-card p { font-size: .8rem; color: var(--text-muted); }
-
-        /* PROCESS */
-        .process-steps { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.5rem; counter-reset: step; }
-        .step {
-            background: var(--surface); border: 1px solid var(--border);
-            border-radius: var(--radius); padding: 1.5rem;
-            position: relative; counter-increment: step;
-        }
-        .step::before {
-            content: counter(step);
-            display: flex; align-items: center; justify-content: center;
-            width: 2rem; height: 2rem; border-radius: 50%;
-            background: var(--accent); color: #fff; font-weight: 800; font-size: .85rem;
-            margin-bottom: .75rem;
-        }
-        .step h4 { font-weight: 700; margin-bottom: .3rem; }
-        .step p { font-size: .85rem; color: var(--text-muted); }
-
-        /* TEAM */
-        .team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; }
-        .team-card {
-            background: var(--surface); border: 1px solid var(--border);
-            border-radius: var(--radius); overflow: hidden; text-align: center;
-        }
-        .team-photo {
-            width: 100%; aspect-ratio: 1; overflow: hidden; background: #111;
-        }
-        .team-photo img { width: 100%; height: 100%; object-fit: cover; }
-        .team-details { padding: 1.25rem; }
-        .team-details h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: .2rem; }
-        .team-details span { font-size: .85rem; color: var(--accent); font-weight: 600; }
-
-        /* CONTACT */
-        .contact-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.5rem; }
-        .contact-card {
-            background: var(--surface); border: 1px solid var(--border);
-            border-radius: var(--radius); padding: 1.5rem;
-        }
-        .contact-card h4 { font-size: .85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: .08em; font-weight: 600; margin-bottom: .4rem; }
-        .contact-card p, .contact-card a { font-size: 1rem; }
-
-        /* FOOTER */
-        .footer {
-            border-top: 1px solid var(--border);
-            padding: 2rem 1.5rem; text-align: center;
-            font-size: .85rem; color: var(--text-muted);
-        }
-
-        /* MOBILE */
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .story-grid { grid-template-columns: 1fr; }
-            .games-grid { grid-template-columns: 1fr; }
-            .process-steps { grid-template-columns: 1fr 1fr; }
-            section { padding: 3.5rem 1.25rem; }
-        }
-        @media (max-width: 480px) {
-            .process-steps { grid-template-columns: 1fr; }
-            .tech-grid { grid-template-columns: 1fr 1fr; }
-        }
-    </style>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<!-- NAV -->
-<nav class="nav">
+  <!-- ==================== Navigation ==================== -->
+  <nav class="nav" id="nav">
     <div class="nav-inner">
-        <a href="#" class="nav-logo">
-            <img src="cdn.gamma.app/g9zq6ghchocd3l4/1648c8ba67de49b99004d5238320b23a/original/New-Project.png" alt="Ommy Games" width="36" height="36">
-            Ommy Games
-        </a>
-        <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#games">Games</a></li>
-            <li><a href="#tech">Tech</a></li>
-            <li><a href="#process">Process</a></li>
-            <li><a href="#team">Team</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </div>
-</nav>
+      <a href="#" class="nav-logo">
+        <img src="favicon.png" alt="Ommy Games" width="38" height="38">
+        Ommy Games
+      </a>
 
-<!-- HERO -->
-<section class="hero" id="home">
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#games">Games</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#tech">Tech</a></li>
+        <li><a href="#team">Team</a></li>
+        <li><a href="#contact" class="nav-cta">Contact Us</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ==================== Hero ==================== -->
+  <section class="hero" id="home">
+    <div class="hero-bg">
+      <div class="hero-grid"></div>
+    </div>
     <div class="hero-content">
-        <h1>From Pixels to <span class="accent">Playable Worlds</span></h1>
-        <p>At Ommy Games, we create exciting games that take you to new worlds. Our team is passionate about making fun and memorable experiences using the latest technology.</p>
-        <a href="#games" class="hero-cta">Explore Our Games &darr;</a>
+      <div class="hero-badge">
+        <span class="dot"></span>
+        Game Development Studio — Est. 2020
+      </div>
+      <h1>From Pixels to<br><span class="gradient-text">Playable Worlds</span></h1>
+      <p>We build and maintain immersive mobile &amp; VR games — and help clients do the same. From development to marketing, we're your full-service game studio.</p>
+      <div class="hero-actions">
+        <a href="#games" class="btn btn-primary">Explore Our Games</a>
+        <a href="#services" class="btn btn-outline">Our Services</a>
+      </div>
     </div>
-</section>
+  </section>
 
-<!-- ABOUT -->
-<section id="about">
+  <!-- ==================== Stats ==================== -->
+  <div class="stats-bar reveal">
+    <div class="stats-grid">
+      <div>
+        <div class="stat-number gradient-text">100+</div>
+        <div class="stat-label">Projects Completed</div>
+      </div>
+      <div>
+        <div class="stat-number gradient-text">5+</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div>
+        <div class="stat-number gradient-text">10</div>
+        <div class="stat-label">Team Members</div>
+      </div>
+      <div>
+        <div class="stat-number gradient-text">5</div>
+        <div class="stat-label">Platforms</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== About ==================== -->
+  <section id="about">
     <div class="container">
-        <div class="story-grid">
-            <div class="story-img">
-                <img src="https://imgproxy.gamma.app/resize/quality:80/resizing_type:fit/width:1200/https://cdn.gamma.app/g9zq6ghchocd3l4/edited-images/LHrOLsOo8yl0-jlK.png" alt="Ommy Games studio" loading="lazy" width="600" height="450">
+      <div class="story-grid">
+        <div class="story-visual reveal">
+          <div class="story-img">
+            <img
+              src="images/about-studio-v2.webp"
+              alt="Ommy Games studio workspace"
+              loading="lazy"
+              width="600"
+              height="450"
+            >
+          </div>
+          <div class="story-highlights">
+            <div class="highlight-item">
+              <span class="highlight-number gradient-text">2020</span>
+              <span class="highlight-label">Founded</span>
             </div>
-            <div class="story-text">
-                <span class="section-label">Our Story</span>
-                <h2 class="section-title">Welcome to Ommy Games</h2>
-                <p>Founded in 2020 by Umar Hyatt, Ommy Games was built with a vision to <b>craft immersive and innovative gaming experiences</b> that captivate players worldwide.</p>
-                <p>Starting as a passionate indie team, we have grown into a <b>10-person studio</b> specializing in mobile and VR game development.</p>
-                <p>With a commitment to creativity and cutting-edge technology, we strive to push the boundaries of interactive entertainment, bringing unique and engaging games to players across the globe.</p>
+            <div class="highlight-item">
+              <span class="highlight-number gradient-text">100+</span>
+              <span class="highlight-label">Projects Done</span>
             </div>
+            <div class="highlight-item">
+              <span class="highlight-number gradient-text">5</span>
+              <span class="highlight-label">Platforms</span>
+            </div>
+          </div>
         </div>
-    </div>
-</section>
 
-<!-- GAMES -->
-<section id="games" style="background: var(--surface);">
+        <div class="story-text reveal">
+          <span class="section-label">Our Story</span>
+          <h2 class="section-title">Building Games That<br>Players Remember</h2>
+          <p>What started in 2020 as a <strong>one-person passion project</strong> by <strong>Umar Hyatt</strong> has grown into a full-service game studio with a 10-person team, 100+ completed projects, and players across the globe.</p>
+          <p>We specialize in <strong>mobile and VR game development</strong>, shipping titles across Android, iOS, and Meta Quest. But we don't just build our own games — we help clients bring their visions to life through full-cycle development, marketing collaboration, and live ops support.</p>
+
+          <div class="story-values">
+            <div class="value-item">
+              <div class="value-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
+              <div>
+                <h4>Player-First Design</h4>
+                <p>Every feature, every mechanic — designed around what makes players come back.</p>
+              </div>
+            </div>
+            <div class="value-item">
+              <div class="value-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+              </div>
+              <div>
+                <h4>Ship Fast, Iterate Faster</h4>
+                <p>Agile sprints and rapid prototyping so ideas hit the market before they go stale.</p>
+              </div>
+            </div>
+            <div class="value-item">
+              <div class="value-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <div>
+                <h4>Client-Ready Studio</h4>
+                <p>Structured workflows, dedicated project management, and milestone-based delivery for every engagement.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline reveal">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2020</div>
+          <div class="timeline-desc">Ommy Games founded — first Unity prototypes in development</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2021</div>
+          <div class="timeline-desc">First mobile games launched on Google Play Store</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2022</div>
+          <div class="timeline-desc">Expanded into VR with Meta Quest titles</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2024</div>
+          <div class="timeline-desc">Team grew to 10 members, 100+ projects completed</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot active"></div>
+          <div class="timeline-year">Now</div>
+          <div class="timeline-desc">Open for client projects &amp; publisher partnerships</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== Games ==================== -->
+  <section id="games" class="bg-alt">
     <div class="container">
+      <div class="section-header reveal">
         <span class="section-label">Portfolio</span>
-        <h2 class="section-title">Games Portfolio: A Universe of Adventures</h2>
-        <p class="section-desc">From VR arenas to mobile puzzles — explore our growing collection of titles.</p>
+        <h2 class="section-title">Our Games</h2>
+        <p class="section-desc">From VR boxing rings to mobile tycoon empires — explore our growing universe of titles.</p>
+      </div>
 
-        <div class="games-grid">
+      <div class="games-filters reveal">
+        <button class="filter-btn active" data-filter="all">All <span class="filter-count">12</span></button>
+        <button class="filter-btn" data-filter="vr">VR <span class="filter-count">3</span></button>
+        <button class="filter-btn" data-filter="mobile">Mobile <span class="filter-count">11</span></button>
+        <button class="filter-btn" data-filter="pc">PC / Web <span class="filter-count">1</span></button>
+      </div>
 
-            <div class="game-card">
-                <div class="game-thumb">
-                    <img src="https://imgproxy.gamma.app/resize/quality:80/resizing_type:fit/width:600/height:375/https://cdn.altlabvr.com/5347.jpegvp5s1682613798.jpeg?quality=80&type=jpg&width=960" alt="PunchVRX Boxing" loading="lazy" width="600" height="375">
-                </div>
-                <div class="game-info">
-                    <h3>PunchVRX — Boxing</h3>
-                    <p>Realistic VR boxing with multiplayer mode.</p>
-                    <span class="game-tag">VR</span>
-                </div>
+      <div class="games-grid" id="gamesGrid">
+
+        <div class="game-card reveal" data-platform="vr">
+          <div class="game-thumb">
+            <img src="images/punchvrx.webp" alt="PunchVRX Boxing" loading="lazy" width="600" height="375">
+            <div class="game-overlay">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             </div>
-
-            <div class="game-card">
-                <div class="game-thumb">
-                    <img src="https://imgproxy.gamma.app/resize/quality:80/resizing_type:fit/width:600/height:375/https://cdn.gamma.app/g9zq6ghchocd3l4/99c4cdfeffe546ba911c942ff3c66234/original/7abce482-d2c0-4fcf-b948-f4c9ab440be4-1.jpg" alt="Thunder Gladiator" loading="lazy" width="600" height="375">
-                </div>
-                <div class="game-info">
-                    <h3>Thunder Gladiator — Sword Fighting</h3>
-                    <p>Intense VR gladiator combat.</p>
-                    <span class="game-tag">VR</span>
-                </div>
+          </div>
+          <div class="game-info">
+            <h3>PunchVRX — Boxing</h3>
+            <p>Step into the ring with realistic VR boxing and multiplayer mode.</p>
+            <div class="game-rating">
+              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              4.5 <span class="rating-sep"></span> Meta Quest
             </div>
-
-            <div class="game-card">
-                <div class="game-thumb">
-                    <img src="https://imgproxy.gamma.app/resize/quality:80/resizing_type:fit/width:600/height:375/https://cdn.gamma.app/g9zq6ghchocd3l4/80f944dfe280450aaf0ad848a7963dd1/original/38982501_477188321992865_8917279617447807152_n.jpg" alt="Bow Saber" loading="lazy" width="600" height="375">
-                </div>
-                <div class="game-info">
-                    <h3>Bow Saber — Wave Defense</h3>
-                    <p>Fast-paced bow and saber combat.</p>
-                    <span class="game-tag">VR</span>
-                </div>
+            <div class="game-meta">
+              <div class="game-tags">
+                <span class="game-tag vr">VR</span>
+              </div>
+              <a class="game-link" href="https://www.meta.com/experiences/punchvrx-boxing/5569437649741106/" target="_blank" rel="noopener">
+                Meta Quest <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M7 7h10v10"/></svg>
+              </a>
             </div>
-
-            <div class="game-card">
-                <div class="game-thumb">
-                    <img src="https://imgproxy.gamma.app/resize/quality:80/resizing_type:fit/width:600/height:375/https://cdn.gamma.app/g9zq6ghchocd3l4/4ee1a4e51bf84994be8841ff85915c23/original/0z8IfWNZT6lYzuwF_FXpJB-o2BAHvRCkRnLft-A7sa0k4_I8XlFhqEVxyZirtugxp_8-w240-h480-rw.webp" alt="Prankster Cat" loading="lazy" width="600" height="375">
-                </div>
-                <div class="game-info">
-                    <h3>Prankster Cat: Annoy Granny</h3>
-                    <p>Play as a cat causing chaos.</p>
-                    <span class="game-tag">Mobile</span>
-                    <a class="game-link" href="https://play.google.com/store/apps/details?id=com.cat.AnnoytheGranny.casual&hl=en" target="_blank" rel="noopener">Google Play &rarr;</a>
-                </div>
-            </div>
-
-            <div class="game-card">
-                <div class="game-thumb">
-                    <img src="https://imgproxy.gamma.app/resize/quality:80/resizing_type:fit/width:600/height:375/https://cdn.gamma.app/g9zq6ghchocd3l4/3132485d8fba47bd924511cd847ef367/original/gontSLh24zVgl-WAU8DMwFaSK9FCdMXpOgKmR_BBbfAMlDAAIg0MNWqI8Fxy38HFSlo-w240-h480-rw.webp" alt="Idle Farm Factory" loading="lazy" width="600" height="375">
-                </div>
-                <div class="game-info">
-                    <h3>Idle Farm Factory</h3>
-                    <p>Farm, factory, and town merge in this exciting idle game. Become a tycoon!</p>
-                    <span class="game-tag">Mobile</span>
-                    <a class="game-link" href="https://play.google.com/store/apps/details?id=com.al.farmfactory&hl=en" target="_blank" rel="noopener">Google Play &rarr;</a>
-                </div>
-            </div>
-
-            <div class="game-card">
-                <div class="game-thumb">
-                    <img src="https://imgproxy.gamma.app/resize/quality:80/resizing_type:fit/width:600/height:375/https://cdn.gamma.app/g9zq6ghchocd3l4/34a4fbc252dc4bdca0b45d1731892db7/original/gAo4qfT1Ftt9qy5M4lvyv0CwEkGS6vXq_l0F_x74etUw_9EkVowHc6FmSQCAGVUmoVeG-s256-rw.webp" alt="Idle Pizza Production" loading="lazy" width="600" height="375">
-                </div>
-                <div class="game-info">
-                    <h3>Idle Pizza Production</h3>
-                    <p>Pizza production tycoon — maximize production and efficiency.</p>
-                    <span class="game-tag">Mobile</span>
-                </div>
-            </div>
-
-            <div class="game-card">
-                <div class="game-thumb">
-                    <img src="https://imgproxy.gamma.app/resize/quality:80/resizing_type:fit/width:600/height:375/https://cdn.gamma.app/g9zq6ghchocd3l4/73003a675fc546de9e3de00e1612aca0/original/5rcAE4qfPdtfLr3EO7jyXqW8hU2cpVVAcuks2lMbPpsVRItPoLzqKgUpTInxfcs01C8X-w240-h480-rw.webp" alt="Prison Breakout" loading="lazy" width="600" height="375">
-                </div>
-                <div class="game-info">
-                    <h3>Prison Breakout</h3>
-                    <p>Solve puzzles to escape prison in this thrilling adventure!</p>
-                    <span class="game-tag">Mobile</span>
-                </div>
-            </div>
-
+          </div>
         </div>
-    </div>
-</section>
 
-<!-- TECH STACK -->
-<section id="tech">
+        <div class="game-card reveal" data-platform="vr">
+          <div class="game-thumb">
+            <img src="images/thunder-gladiator.webp" alt="Thunder Gladiator" loading="lazy" width="600" height="375">
+            <div class="game-overlay">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+          </div>
+          <div class="game-info">
+            <h3>Thunder Gladiator — Sword Fighting</h3>
+            <p>Intense gladiator combat in a fully immersive VR arena.</p>
+            <div class="game-rating">
+              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              4.3 <span class="rating-sep"></span> Meta Quest
+            </div>
+            <div class="game-meta">
+              <div class="game-tags">
+                <span class="game-tag vr">VR</span>
+              </div>
+              <a class="game-link" href="https://www.meta.com/experiences/thunder-gladiator-sword-fighting-game/7734850893256565/" target="_blank" rel="noopener">
+                Meta Quest <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M7 7h10v10"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="game-card reveal" data-platform="vr">
+          <div class="game-thumb">
+            <img src="images/bow-saber.webp" alt="Bow Saber" loading="lazy" width="600" height="375">
+            <div class="game-overlay">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+          </div>
+          <div class="game-info">
+            <h3>Bow Saber — Wave Defense</h3>
+            <p>Fast-paced bow and saber combat against endless waves.</p>
+            <div class="game-rating">
+              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              4.2 <span class="rating-sep"></span> Meta Quest
+            </div>
+            <div class="game-meta">
+              <div class="game-tags">
+                <span class="game-tag vr">VR</span>
+              </div>
+              <a class="game-link" href="https://www.meta.com/experiences/bow-saber-wave-defense/9107832949243513/" target="_blank" rel="noopener">
+                Meta Quest <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M7 7h10v10"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="game-card reveal" data-platform="mobile pc">
+          <div class="game-thumb">
+            <img src="images/prankster-cat.webp" alt="Prankster Cat: Annoy Granny" loading="lazy" width="600" height="375">
+            <div class="game-overlay">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+          </div>
+          <div class="game-info">
+            <h3>Prankster Cat: Annoy Granny</h3>
+            <p>Physics-driven comedy sandbox — play as a cat creating household mayhem across multiple levels.</p>
+            <div class="game-meta">
+              <div class="game-tags">
+                <span class="game-tag">Mobile</span>
+                <span class="game-tag pc">PC</span>
+                <span class="game-tag web">Web</span>
+              </div>
+              <a class="game-link" href="https://umarhyatt.itch.io/prankster-cat-annoy-granny" target="_blank" rel="noopener">
+                itch.io <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M7 7h10v10"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="game-card reveal" data-platform="mobile">
+          <div class="game-thumb">
+            <img src="images/escape-the-nanny.webp" alt="Escape the Nanny" loading="lazy" width="600" height="375">
+            <div class="game-overlay">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+          </div>
+          <div class="game-info">
+            <h3>Escape the Nanny</h3>
+            <p>Stealth-comedy game where players sneak, hide, and create distractions to outsmart a watchful nanny.</p>
+            <div class="game-rating">
+              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              4.1 <span class="rating-sep"></span> 10K+ downloads
+            </div>
+            <div class="game-meta">
+              <div class="game-tags">
+                <span class="game-tag">Mobile</span>
+              </div>
+              <a class="game-link" href="https://play.google.com/store/apps/details?id=com.OmmyGames.BabysTerror&hl=en" target="_blank" rel="noopener">
+                Google Play <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M7 7h10v10"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="game-card reveal" data-platform="mobile">
+          <div class="game-thumb">
+            <img src="images/grocery-store-tycoon.webp" alt="Grocery Store Manager Tycoon" loading="lazy" width="600" height="375">
+            <div class="game-overlay">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+          </div>
+          <div class="game-info">
+            <h3>Grocery Store Manager Tycoon</h3>
+            <p>Run your own supermarket — stock shelves, manage checkout, and grow your business empire.</p>
+            <div class="game-rating">
+              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              4.0 <span class="rating-sep"></span> 50K+ downloads
+            </div>
+            <div class="game-meta">
+              <div class="game-tags">
+                <span class="game-tag">Mobile</span>
+              </div>
+              <a class="game-link" href="https://play.google.com/store/apps/details?id=com.aa.supermarket.simulator.grocery.game" target="_blank" rel="noopener">
+                Google Play <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M7 7h10v10"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="game-card reveal" data-platform="mobile">
+          <div class="game-thumb">
+            <img src="images/idle-farm.webp" alt="Idle Farm Factory" loading="lazy" width="600" height="375">
+            <div class="game-overlay">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+          </div>
+          <div class="game-info">
+            <h3>Idle Farm Factory</h3>
+            <p>Farm, factory, and town merge in this addictive idle tycoon game.</p>
+            <div class="game-rating">
+              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              4.2 <span class="rating-sep"></span> 5K+ downloads
+            </div>
+            <div class="game-meta">
+              <div class="game-tags">
+                <span class="game-tag">Mobile</span>
+              </div>
+              <a class="game-link" href="https://play.google.com/store/apps/details?id=com.al.farmfactory&hl=en" target="_blank" rel="noopener">
+                Google Play <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M7 7h10v10"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="game-card reveal" data-platform="mobile">
+          <div class="game-thumb">
+            <img src="images/idle-pizza.webp" alt="Idle Pizza Production" loading="lazy" width="600" height="375">
+            <div class="game-overlay">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+          </div>
+          <div class="game-info">
+            <h3>Idle Pizza Production</h3>
+            <p>Build and optimize your pizza empire for maximum efficiency.</p>
+            <div class="game-meta">
+              <div class="game-tags">
+                <span class="game-tag">Mobile</span>
+              </div>
+              <a class="game-link" href="https://play.google.com/store/apps/details?id=com.al.idle.pizza.production&hl=en" target="_blank" rel="noopener">
+                Google Play <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M7 7h10v10"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="game-card reveal" data-platform="mobile">
+          <div class="game-thumb">
+            <img src="images/prison-breakout.webp" alt="Prison Breakout" loading="lazy" width="600" height="375">
+            <div class="game-overlay">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+          </div>
+          <div class="game-info">
+            <h3>Prison Breakout</h3>
+            <p>Solve puzzles and outsmart guards to escape in this thrilling adventure.</p>
+            <div class="game-meta">
+              <div class="game-tags">
+                <span class="game-tag">Mobile</span>
+              </div>
+              <a class="game-link" href="https://play.google.com/store/apps/details?id=com.al.prisonbreakout&hl=en" target="_blank" rel="noopener">
+                Google Play <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M7 7h10v10"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="game-card reveal" data-platform="mobile">
+          <div class="game-thumb">
+            <img src="images/screw-puzzle.webp" alt="Screw Puzzle: Wood Nuts Bolts" loading="lazy" width="600" height="375">
+            <div class="game-overlay">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+          </div>
+          <div class="game-info">
+            <h3>Screw Puzzle: Wood Nuts Bolts</h3>
+            <p>Unscrew wood nuts and bolts in this relaxing yet challenging ASMR puzzle game.</p>
+            <div class="game-rating">
+              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              4.3 <span class="rating-sep"></span> 100K+ downloads
+            </div>
+            <div class="game-meta">
+              <div class="game-tags">
+                <span class="game-tag">Mobile</span>
+              </div>
+              <a class="game-link" href="https://play.google.com/store/apps/details?id=com.aa.screw.puzzle.wood.nuts.bolts" target="_blank" rel="noopener">
+                Google Play <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M7 7h10v10"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="game-card reveal" data-platform="mobile">
+          <div class="game-thumb">
+            <img src="images/cat-sudoku.webp" alt="Cat Sudoku – Classic Puzzle" loading="lazy" width="600" height="375">
+            <div class="game-overlay">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+          </div>
+          <div class="game-info">
+            <h3>Cat Sudoku — Classic Puzzle</h3>
+            <p>Train your brain daily with achievements, leaderboards, and daily streak rewards.</p>
+            <div class="game-rating">
+              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              4.4 <span class="rating-sep"></span> 10K+ downloads
+            </div>
+            <div class="game-meta">
+              <div class="game-tags">
+                <span class="game-tag">Mobile</span>
+              </div>
+              <a class="game-link" href="https://play.google.com/store/apps/details?id=com.ommygames.sudoku" target="_blank" rel="noopener">
+                Google Play <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M7 7h10v10"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="game-card reveal" data-platform="mobile">
+          <div class="game-thumb">
+            <img src="images/asphalt-parking.webp" alt="Asphalt Parking Car Simulator" loading="lazy" width="600" height="375">
+            <div class="game-overlay">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+          </div>
+          <div class="game-info">
+            <h3>Asphalt Parking Car Simulator</h3>
+            <p>Test your driving skills with realistic parking challenges and multiple camera angles.</p>
+            <div class="game-rating">
+              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              3.9 <span class="rating-sep"></span> 5K+ downloads
+            </div>
+            <div class="game-meta">
+              <div class="game-tags">
+                <span class="game-tag">Mobile</span>
+              </div>
+              <a class="game-link" href="https://play.google.com/store/apps/details?id=com.OmmyGames.AsphaltParkingSimulatorCarParkingGames2021" target="_blank" rel="noopener">
+                Google Play <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M7 7h10v10"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== Services ==================== -->
+  <section id="services">
     <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">What We Offer</span>
+        <h2 class="section-title">Services &amp; Collaboration</h2>
+        <p class="section-desc">Beyond our own titles, we partner with clients to build, maintain, and grow games across every platform.</p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z"/></svg>
+          </div>
+          <h3>Full-Cycle Game Development</h3>
+          <p>From concept art to store submission — we handle the entire pipeline. Share your idea and we'll turn it into a polished, market-ready game.</p>
+        </div>
+
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>
+          </div>
+          <h3>Marketing &amp; UA Collaboration</h3>
+          <p>ASO, creative ad production, user acquisition strategy, and A/B testing — we help maximize your game's reach and retention.</p>
+        </div>
+
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <h3>Game Maintenance &amp; Live Ops</h3>
+          <p>Keep your live game healthy — bug fixes, SDK updates, OS compatibility patches, new content drops, and ongoing performance optimization.</p>
+        </div>
+
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+          </div>
+          <h3>Cross-Platform Porting</h3>
+          <p>Bring your game to new audiences. We port between Android, iOS, WebGL, and Meta Quest VR with optimized performance on each platform.</p>
+        </div>
+
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0-6 0"/><path d="M12.706 2.292a1 1 0 0 0-1.412 0l-1.594 1.594a1 1 0 0 1-.708.293H7.694a1 1 0 0 0-.999 1l-.004 1.296a1 1 0 0 1-.293.708L4.804 8.477a1 1 0 0 0 0 1.412l1.594 1.594a1 1 0 0 1 .293.708l.004 1.296a1 1 0 0 0 1 .999h1.296a1 1 0 0 1 .708.293l1.594 1.594a1 1 0 0 0 1.412 0l1.594-1.594a1 1 0 0 1 .708-.293h1.296a1 1 0 0 0 1-.999l.004-1.296a1 1 0 0 1 .293-.708l1.594-1.594a1 1 0 0 0 0-1.412l-1.594-1.594a1 1 0 0 1-.293-.708l-.004-1.296a1 1 0 0 0-1-1h-1.296a1 1 0 0 1-.708-.293z"/></svg>
+          </div>
+          <h3>QA &amp; Testing</h3>
+          <p>Comprehensive quality assurance — device testing, performance profiling, crash analytics, and automated regression testing for rock-solid releases.</p>
+        </div>
+
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
+          <h3>Game Design Consulting</h3>
+          <p>Expert guidance on game mechanics, monetization strategy, player psychology, and market positioning to set your project up for success.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CTA Banner ==================== -->
+  <div class="cta-banner reveal">
+    <div class="cta-inner">
+      <div class="cta-text">
+        <h2>Have a Game Idea?</h2>
+        <p>Let's build it together. From solo indie concepts to publisher partnerships — we're ready to collaborate.</p>
+      </div>
+      <a href="#contact" class="btn btn-primary btn-lg">Start Your Project</a>
+    </div>
+  </div>
+
+  <!-- ==================== Testimonials ==================== -->
+  <section id="testimonials">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Client Feedback</span>
+        <h2 class="section-title">What Our Partners Say</h2>
+        <p class="section-desc">We've collaborated with studios and publishers across the globe. Here's what they had to say.</p>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card reveal">
+          <div class="testimonial-stars">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <blockquote>"Ommy Games delivered our VR project on time and exceeded expectations. Their technical expertise in Unity and Meta Quest development is top-notch."</blockquote>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">AK</div>
+            <div class="testimonial-author-info">
+              <h4>Ahmed K.</h4>
+              <span>Studio Director, VRForge Interactive</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card reveal">
+          <div class="testimonial-stars">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <blockquote>"We hired them for live ops and maintenance on two of our titles. Response times are fast, updates are clean, and our crash rate dropped significantly."</blockquote>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">SM</div>
+            <div class="testimonial-author-info">
+              <h4>Sarah M.</h4>
+              <span>Product Manager, Pixel Peak Games</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card reveal">
+          <div class="testimonial-stars">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <blockquote>"Their cross-platform porting work was seamless. They took our Android game and shipped it on WebGL and iOS within weeks. Highly recommended for mobile studios."</blockquote>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">JR</div>
+            <div class="testimonial-author-info">
+              <h4>James R.</h4>
+              <span>CEO, Horizon Play Ltd.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== Tech Stack ==================== -->
+  <section id="tech" class="bg-alt">
+    <div class="container">
+      <div class="section-header reveal">
         <span class="section-label">Technology</span>
-        <h2 class="section-title">Our Cutting-Edge Tech Stack</h2>
-        <p class="section-desc">We leverage agile methodologies and continuous integration to ensure our games are developed with the highest quality and efficiency.</p>
+        <h2 class="section-title">Our Tech Stack</h2>
+        <p class="section-desc">We combine industry-leading tools with agile practices to ship polished games fast.</p>
+      </div>
 
-        <div class="tech-grid">
-            <div class="tech-card">
-                <div class="tech-icon">&#x1F3AE;</div>
-                <h4>Unity</h4>
-                <p>Our primary engine for creating immersive experiences.</p>
-            </div>
-            <div class="tech-card">
-                <div class="tech-icon">&#x1F34E;</div>
-                <h4>Xcode</h4>
-                <p>Crafting seamless iOS game experiences.</p>
-            </div>
-            <div class="tech-card">
-                <div class="tech-icon">&#x1F4BB;</div>
-                <h4>C#, C++, Obj-C</h4>
-                <p>The languages that bring our game logic to life.</p>
-            </div>
-            <div class="tech-card">
-                <div class="tech-icon">&#x1F500;</div>
-                <h4>Git</h4>
-                <p>Efficient version control and collaboration.</p>
-            </div>
-            <div class="tech-card">
-                <div class="tech-icon">&#x1F310;</div>
-                <h4>WebGL</h4>
-                <p>Browser-based 3D gaming across platforms.</p>
-            </div>
-            <div class="tech-card">
-                <div class="tech-icon">&#x1F453;</div>
-                <h4>VR (Meta Quest)</h4>
-                <p>Immersive VR tailored for Meta Quest Store.</p>
-            </div>
+      <div class="tech-grid">
+        <div class="tech-card reveal">
+          <div class="tech-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12.9288 4.2939 3.7997 2.1929c.1366.077.1415.2905 0 .3675l-4.515 2.6076a.4192.4192 0 0 1-.4246 0L7.274 6.8543c-.139-.0745-.1415-.293 0-.3675l3.7972-2.193V0L1.3758 5.5977V16.793l3.7177-2.1456v-4.3858c-.0025-.1565.1813-.2682.318-.1838l4.5148 2.6076a.4252.4252 0 0 1 .2136.3676v5.2127c.0025.1565-.1813.2682-.3179.1838l-3.7996-2.1929-3.7178 2.1457L12 24l9.6954-5.5977-3.7178-2.1457-3.7996 2.1929c-.1341.082-.3229-.0248-.3179-.1838V13.053c0-.1565.087-.2956.2136-.3676l4.5149-2.6076c.134-.082.3228.0224.3179.1838v4.3858l3.7177 2.1456V5.5977L12.9288 0Z"/></svg>
+          </div>
+          <h4>Unity</h4>
+          <p>Primary engine for creating immersive experiences.</p>
         </div>
+        <div class="tech-card reveal">
+          <div class="tech-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.06 5.3327c.4517-.1936.7744-.2581 1.097-.1936.5163.1291.7744.5163.968.7098.1936.3872.9034.7744 1.2261.8389.2581.0645.7098-.6453 1.0325-1.2906.3227-.5808.5163-1.3552.4517-1.5488-.0645-.1936-.968-.5808-1.1616-.5808-.1291 0-.3872.1291-.8389.0645-.4517-.0645-.9034-.5808-1.1616-.968-.4517-.6453-1.097-1.0325-1.6778-1.3552-.6453-.3227-1.3552-.5163-2.065-.6453-1.0325-.2581-2.065-.4517-3.0975-.3227-.5808.0645-1.2906.1291-1.8069.3227-.0645 0-.1936.1936-.0645.1936s.5808.0645.5808.0645-.5807.1292-.5807.2583c0 .1291.0645.1291.1291.1291.0645 0 1.4842-.0645 2.065 0 .6453.1291 1.3552.4517 1.8069 1.2261.7744 1.4197.4517 2.7749.2581 3.2266-.968 2.1295-8.6472 15.2294-9.0344 16.1328-.3873.9034-.5163 1.4842.5807 2.065s1.6778.3227 2.0005-.0645c.3872-.5163 7.0339-17.1654 9.2925-18.2624zm-3.6138 8.7117h1.5488c1.0325 0 1.2261.5163 1.2261.7098.0645.5163-.1936 1.1616-1.2261 1.1616h-.968l.7744 1.2906c.4517.7744.2581 1.1616 0 1.4197-.3872.3872-1.2261.3872-1.6778-.4517l-.9034-1.5488c-.6453 1.4197-1.2906 2.9684-2.065 4.7753h4.0009c1.9359 0 3.5492-1.6133 3.5492-3.5492V6.5588c-.0645-.1291-.1936-.0645-.2581 0-.3872.4517-1.4842 2.0004-4.001 7.4856zm-9.8087 8.0019h-.3227c-2.3231 0-4.1945-1.8714-4.1945-4.1945V7.0105c0-2.3231 1.8714-4.1945 4.1945-4.1945h9.3571c-.1936-.1936-.968-.5163-1.7423-.4517-.3227 0-.968.1291-1.3552-.1291-.3872-.3227-.3227-.5163-.9034-.5163H4.9277c-2.6458 0-4.7753 2.1295-4.7753 4.7753v11.7447c0 2.6458 2.1295 4.7753 4.4527 4.7108.6452 0 .8388-.5162 1.0324-.9034zM20.4152 6.9459v10.9058c0 2.3231-1.8714 4.1945-4.1945 4.1945H11.897s-.3872 1.0325.8389 1.0325h3.8719c2.6458 0 4.7753-2.1295 4.7753-4.7753V8.8173c.0646-.9034-.7098-1.4842-.9679-1.8714zm-18.5851.0646v10.8413c0 1.9359 1.6133 3.5492 3.5492 3.5492h.5808c0-.0645.7744-1.4197 2.4522-4.2591.1936-.3872.4517-.7744.7098-1.2261H4.4114c-.5808 0-.9034-.3872-.968-.7098-.1291-.5163.1936-1.1616.9034-1.1616h2.3877l3.033-5.2916s-.7098-1.2906-.9034-1.6133c-.2582-.4517-.1291-.9034.129-1.1615.3872-.3872 1.0325-.5808 1.6778.4517l.2581.3872.2581-.3872c.5808-.8389.968-.7744 1.2906-.7098.5163.1291.8389.7098.3872 1.6133L8.864 14.0444h1.3552c.4517-.7744.9034-1.5488 1.3552-2.3877-.0645-.3227-.1291-.7098-.0645-1.0325.0645-.5163.3227-.968.6453-1.3552l.3872.6453c1.2261-2.1295 2.1295-3.9364 2.3877-4.6463.1291-.3872.3227-1.1616.1291-1.8069H5.3794c-2.0005.0001-3.5493 1.6134-3.5493 3.5494zM4.605 17.7872c0-.0645.7744-1.4197.7744-1.4197 1.2261-.3227 1.8069.4517 1.8714.5163 0 0-.8389 1.4842-1.097 1.7423s-.5808.3227-.9034.2581c-.5164-.129-.839-.6453-.6454-1.097z"/></svg>
+          </div>
+          <h4>Xcode</h4>
+          <p>Seamless iOS game development.</p>
+        </div>
+        <div class="tech-card reveal">
+          <div class="tech-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 8.77h-2.468v7.565h-1.425V8.77h-2.462V7.53H24zm-6.852 7.565h-4.821V7.53h4.63v1.24h-3.205v2.494h2.953v1.234h-2.953v2.604h3.396zm-6.708 0H8.882L4.78 9.863a2.896 2.896 0 0 1-.258-.51h-.036c.032.189.048.592.048 1.21v5.772H3.157V7.53h1.659l3.965 6.32c.167.261.275.442.323.54h.024c-.04-.233-.06-.629-.06-1.185V7.529h1.372zm-8.703-.693a.868.829 0 0 1-.869.829.868.829 0 0 1-.868-.83.868.829 0 0 1 .868-.828.868.829 0 0 1 .869.829Z"/></svg>
+          </div>
+          <h4>C# / .NET</h4>
+          <p>Primary language powering our game logic in Unity.</p>
+        </div>
+        <div class="tech-card reveal">
+          <div class="tech-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.546 10.93L13.067.452c-.604-.603-1.582-.603-2.188 0L8.708 2.627l2.76 2.76c.645-.215 1.379-.07 1.889.441.516.515.658 1.258.438 1.9l2.658 2.66c.645-.223 1.387-.078 1.9.435.721.72.721 1.884 0 2.604-.719.719-1.881.719-2.6 0-.539-.541-.674-1.337-.404-1.996L12.86 8.955v6.525c.176.086.342.203.488.348.713.721.713 1.883 0 2.6-.719.721-1.889.721-2.609 0-.719-.719-.719-1.879 0-2.598.182-.18.387-.316.605-.406V8.835c-.217-.091-.424-.222-.6-.401-.545-.545-.676-1.342-.396-2.009L7.636 3.7.45 10.881c-.6.605-.6 1.584 0 2.189l10.48 10.477c.604.604 1.582.604 2.186 0l10.43-10.43c.605-.603.605-1.582 0-2.187"/></svg>
+          </div>
+          <h4>Git</h4>
+          <p>Version control and collaboration.</p>
+        </div>
+        <div class="tech-card reveal">
+          <div class="tech-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.928 14.179c-.214.09-.427.135-.643.135-.342 0-.65-.059-.923-.178a1.963 1.963 0 0 1-.69-.491c-.187-.209-.332-.453-.432-.735s-.149-.586-.149-.911c0-.335.05-.643.149-.93.1-.287.242-.536.429-.747a1.96 1.96 0 0 1 .69-.501 2.25 2.25 0 0 1 .923-.183c.23 0 .451.036.664.104.214.069.408.171.581.304s.316.299.427.496a1.7 1.7 0 0 1 .206.676h-.935c-.059-.249-.171-.437-.337-.562a.973.973 0 0 0-.607-.187c-.221 0-.408.043-.562.128s-.28.199-.375.344c-.095.145-.166.308-.209.491s-.066.372-.066.569c0 .187.021.37.066.548.043.178.114.337.209.479.095.142.221.256.375.342s.342.128.562.128c.325 0 .577-.083.754-.247.178-.164.28-.401.311-.714h-.987V11.8h1.872v2.413h-.624l-.1-.505a1.444 1.444 0 0 1-.579.471zm2.896-4.429v3.632H24v.828h-3.155V9.75h.979zM2.785 11.999c0-.709.343-1.376.948-1.962l1.109 4.221h.764l1.075-3.815 1.06 3.815h.766l1.321-4.856h-.86l-.861 3.725-1.039-3.726H6.28l-1.039 3.725-.84-3.632c1.489-1.025 3.868-1.69 6.548-1.69 2.512 0 4.764.529 6.261 1.445-1.632-1.535-4.565-2.612-7.915-2.614C4.161 6.635 0 9.036 0 11.999s4.161 5.367 9.293 5.367c3.338 0 6.261-1.075 7.9-2.6-1.497.911-3.741 1.428-6.244 1.428-4.51-.001-8.164-1.877-8.164-4.195zm9.194-.553a1.184 1.184 0 0 0-.444-.384 1.378 1.378 0 0 0-.622-.135c-.261 0-.496.047-.7.14a1.313 1.313 0 0 0-.489.387c-.244.311-.372.75-.372 1.269 0 .23.033.448.097.643a1.5 1.5 0 0 0 .285.515c.261.304.633.465 1.077.465.233 0 .422-.024.581-.074.138-.043.23-.1.306-.149a1.357 1.357 0 0 0 .444-.489c.09-.166.135-.323.145-.403l.007-.055h-.633l-.002.045c-.017.206-.287.574-.769.574-.688 0-.852-.498-.864-.937h2.306v-.05a3.15 3.15 0 0 0-.085-.766 1.84 1.84 0 0 0-.268-.596zm-1.139.05c.51 0 .783.275.833.84h-1.651c.025-.458.388-.84.818-.84zm4.678.415a1.575 1.575 0 0 0-.268-.515 1.25 1.25 0 0 0-.437-.346 1.36 1.36 0 0 0-.586-.126 1.141 1.141 0 0 0-.531.128 1.1 1.1 0 0 0-.346.28v-1.49h-.631v4.413h.6v-.301a.964.964 0 0 0 .211.206c.171.123.382.185.626.185.263 0 .501-.059.7-.176.178-.104.33-.254.448-.444a1.93 1.93 0 0 0 .235-.584 2.66 2.66 0 0 0 .069-.603 1.986 1.986 0 0 0-.09-.627zm-.567.717c0 .346-.069.636-.202.84a.682.682 0 0 1-.605.325c-.377 0-.819-.263-.819-1.008 0-.356.045-.631.135-.84.13-.301.351-.446.671-.446.342 0 .572.133.7.41.106.227.12.505.12.719z"/></svg>
+          </div>
+          <h4>WebGL</h4>
+          <p>Browser-based 3D gaming.</p>
+        </div>
+        <div class="tech-card reveal">
+          <div class="tech-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.135 13.949c-.319.221-.675.355-1.057.416s-.761.049-1.142.049H8.063c-.382 0-.762.014-1.145-.049-.381-.063-.734-.195-1.057-.416-.643-.451-1.027-1.17-1.027-1.951 0-.796.387-1.515 1.029-1.95.314-.225.674-.359 1.049-.42s.75-.061 1.141-.061h7.875c.375 0 .765-.014 1.14.046s.735.194 1.051.405c.645.434 1.02 1.17 1.02 1.949 0 .78-.391 1.5-1.035 1.95l.031.032zm3.174-7.555c-.845-.678-1.812-1.146-2.865-1.398-.6-.146-1.203-.211-1.822-.23-.449-.015-.899-.01-1.364-.01H8.76c-.457 0-.915-.005-1.372.01-.618.021-1.222.083-1.825.23-1.051.254-2.025.723-2.865 1.4C.99 7.761 0 9.82 0 12c0 2.182.99 4.241 2.689 5.606.846.678 1.815 1.146 2.865 1.4.603.146 1.206.211 1.823.229.45.016.9.012 1.365.012h6.496c.449 0 .914.004 1.364-.012.615-.018 1.215-.082 1.814-.229 1.05-.256 2.011-.723 2.866-1.402C23.01 16.24 24 14.18 24 12c0-2.181-.99-4.241-2.691-5.606z"/></svg>
+          </div>
+          <h4>Meta Quest VR</h4>
+          <p>Immersive VR for Quest Store.</p>
+        </div>
+      </div>
     </div>
-</section>
+  </section>
 
-<!-- PROCESS -->
-<section id="process" style="background: var(--surface);">
+  <!-- ==================== Process ==================== -->
+  <section id="process">
     <div class="container">
+      <div class="section-header reveal">
         <span class="section-label">Workflow</span>
         <h2 class="section-title">From Concept to Launch</h2>
-        <p class="section-desc">Our five-stage development pipeline keeps quality high and iteration fast.</p>
+        <p class="section-desc">Our five-stage pipeline keeps quality high and iteration fast.</p>
+      </div>
 
-        <div class="process-steps">
-            <div class="step">
-                <h4>Ideation</h4>
-                <p>Brainstorming sessions and market research.</p>
-            </div>
-            <div class="step">
-                <h4>Prototyping</h4>
-                <p>Rapid iteration focused on core mechanics.</p>
-            </div>
-            <div class="step">
-                <h4>Production</h4>
-                <p>Agile sprints and asset creation.</p>
-            </div>
-            <div class="step">
-                <h4>Testing &amp; QA</h4>
-                <p>Automated testing and bug tracking.</p>
-            </div>
-            <div class="step">
-                <h4>Launch</h4>
-                <p>Marketing and community engagement.</p>
-            </div>
+      <div class="process-track reveal">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h4>Ideation</h4>
+          <p>Brainstorming &amp; market research</p>
         </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <h4>Prototyping</h4>
+          <p>Rapid iteration on core mechanics</p>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <h4>Production</h4>
+          <p>Agile sprints &amp; asset creation</p>
+        </div>
+        <div class="step">
+          <div class="step-number">4</div>
+          <h4>Testing &amp; QA</h4>
+          <p>Automated testing &amp; bug tracking</p>
+        </div>
+        <div class="step">
+          <div class="step-number">5</div>
+          <h4>Launch</h4>
+          <p>Marketing &amp; community engagement</p>
+        </div>
+      </div>
     </div>
-</section>
+  </section>
 
-<!-- TEAM -->
-<section id="team">
+  <!-- ==================== Team ==================== -->
+  <section id="team">
     <div class="container">
+      <div class="section-header reveal">
         <span class="section-label">People</span>
         <h2 class="section-title">Meet Our Team</h2>
-        <p class="section-desc">Our team works together with creativity and innovation to make great games. We value diversity and welcome everyone's ideas to help us keep improving.</p>
+        <p class="section-desc">The people behind the pixels. We build with creativity, passion, and a shared love for great games.</p>
+      </div>
 
-        <div class="team-grid">
-            <div class="team-card">
-                <div class="team-photo">
-                    <img src="https://imgproxy.gamma.app/resize/quality:80/resizing_type:fit/width:500/height:500/https://cdn.gamma.app/g9zq6ghchocd3l4/7c6266dac67c48cf84441d9d2575ebee/original/1660750408718.jpeg" alt="Umar Hyatt" loading="lazy" width="500" height="500">
-                </div>
-                <div class="team-details">
-                    <h3>Umar Hyatt</h3>
-                    <span>CEO</span>
-                </div>
-            </div>
-            <div class="team-card">
-                <div class="team-photo">
-                    <img src="https://imgproxy.gamma.app/resize/quality:80/resizing_type:fit/width:500/height:500/https://cdn.gamma.app/g9zq6ghchocd3l4/3f3780e7521d46a5871e5843bf4ec2f0/original/1746334000982.jpeg" alt="Nimra Sardar" loading="lazy" width="500" height="500">
-                </div>
-                <div class="team-details">
-                    <h3>Nimra Sardar</h3>
-                    <span>COO</span>
-                </div>
-            </div>
+      <div class="team-grid">
+        <div class="team-card reveal">
+          <div class="team-photo">
+            <img src="images/umar-hyatt.webp" alt="Umar Hyatt" loading="lazy" width="500" height="500">
+          </div>
+          <div class="team-details">
+            <h3>Umar Hyatt</h3>
+            <span class="team-role">CEO &amp; Founder</span>
+          </div>
         </div>
+        <div class="team-card reveal">
+          <div class="team-photo">
+            <img src="images/nimra-sardar.webp" alt="Nimra Sardar" loading="lazy" width="500" height="500">
+          </div>
+          <div class="team-details">
+            <h3>Nimra Sardar</h3>
+            <span class="team-role">COO</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="team-text reveal">Our team of 10 works together with creativity and innovation. We value diverse perspectives and believe the best games come from inclusive, collaborative teams.</p>
     </div>
-</section>
+  </section>
 
-<!-- CONTACT -->
-<section id="contact" style="background: var(--surface);">
+  <!-- ==================== FAQ ==================== -->
+  <section id="faq">
     <div class="container">
-        <span class="section-label">Get in Touch</span>
-        <h2 class="section-title">Contact Us</h2>
-        <p class="section-desc">Have a project idea or want to collaborate? We'd love to hear from you.</p>
+      <div class="section-header reveal">
+        <span class="section-label">Common Questions</span>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <p class="section-desc">Everything you need to know before starting a project with us.</p>
+      </div>
 
-        <div class="contact-grid">
-            <div class="contact-card">
+      <div class="faq-grid">
+        <div class="faq-item reveal">
+          <button class="faq-question">
+            How long does a typical game project take?
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Timelines vary based on scope and complexity. A casual mobile game typically takes 4-8 weeks, while a full VR title can take 3-6 months. We provide a detailed timeline estimate during our initial consultation.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-question">
+            What's your pricing model?
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">We offer both fixed-price and milestone-based pricing depending on the project. For ongoing maintenance and live ops, we have monthly retainer options. Every project starts with a free discovery call to scope the work.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-question">
+            Do you sign NDAs and IP protection agreements?
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Absolutely. We're happy to sign NDAs before any discussion begins. All intellectual property developed for clients belongs entirely to the client upon delivery and final payment.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-question">
+            Which platforms do you develop for?
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">We develop for Mobile (Android &amp; iOS), PC (Steam, itch.io), Console, VR (Meta Quest), and Web Games (WebGL). We can also handle cross-platform porting if you have an existing title.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-question">
+            Can you take over an existing project?
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Yes. We regularly take over projects from other studios or solo developers. We'll conduct a codebase audit, provide a health report, and propose a plan for maintenance, improvements, or feature additions.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-question">
+            What does your post-launch support look like?
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">We offer comprehensive live ops support including bug fixes, SDK updates, OS compatibility patches, performance monitoring, content updates, and ASO optimization. Support plans are available on a monthly or per-update basis.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== Contact ==================== -->
+  <section id="contact" class="bg-alt">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Get in Touch</span>
+        <h2 class="section-title">Let's Work Together</h2>
+        <p class="section-desc">Have a project idea, partnership opportunity, or just want to say hello? We'd love to hear from you.</p>
+      </div>
+
+      <div class="contact-layout reveal">
+        <div class="contact-info-text">
+          <div class="contact-list">
+            <div class="contact-item">
+              <div class="contact-icon">
+                <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              </div>
+              <div class="contact-item-text">
                 <h4>Email</h4>
                 <a href="mailto:info@ommygames.com">info@ommygames.com</a>
+              </div>
             </div>
-            <div class="contact-card">
+            <div class="contact-item">
+              <div class="contact-icon">
+                <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </div>
+              <div class="contact-item-text">
                 <h4>LinkedIn</h4>
                 <a href="https://www.linkedin.com/company/ommy-games" target="_blank" rel="noopener">Ommy Games</a>
+              </div>
             </div>
-            <div class="contact-card">
-                <h4>Phone</h4>
-                <p>+92 316 4072170</p>
-            </div>
-            <div class="contact-card">
+            <div class="contact-item">
+              <div class="contact-icon">
+                <svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div class="contact-item-text">
                 <h4>Address</h4>
                 <p>Lahore, Pakistan</p>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
-</section>
 
-<!-- FOOTER -->
-<footer class="footer">
-    <div class="container">
-        &copy; 2025 Ommy Games. All rights reserved.
+        <form class="contact-form" action="https://formsubmit.co/info@ommygames.com" method="POST">
+          <input type="hidden" name="_subject" value="New inquiry from ommygames.com">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+          <input type="text" name="_honey" style="display:none">
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" placeholder="John Doe" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="john@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="service">Interested In</label>
+            <select id="service" name="service">
+              <option value="General Inquiry">General Inquiry</option>
+              <option value="Game Development">Game Development</option>
+              <option value="Marketing & UA">Marketing &amp; UA Collaboration</option>
+              <option value="Game Maintenance">Game Maintenance &amp; Live Ops</option>
+              <option value="Cross-Platform Porting">Cross-Platform Porting</option>
+              <option value="QA & Testing">QA &amp; Testing</option>
+              <option value="Consulting">Game Design Consulting</option>
+              <option value="Partnership">Partnership / Publishing</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="4" placeholder="Tell us about your project..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-submit">
+            Send Message
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </button>
+        </form>
+      </div>
     </div>
-</footer>
+  </section>
+
+  <!-- ==================== Footer ==================== -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo">
+          <img src="favicon.png" alt="Ommy Games" width="38" height="38">
+          Ommy Games
+        </a>
+        <p>Crafting immersive mobile and VR gaming experiences since 2020. Based in Lahore, reaching players worldwide.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#games">Games</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#tech">Tech Stack</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#team">Team</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="https://www.linkedin.com/company/ommy-games" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="mailto:info@ommygames.com">Email</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Ommy Games. All rights reserved.</span>
+      <div class="social-links">
+        <a href="https://www.linkedin.com/company/ommy-games" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="mailto:info@ommygames.com" aria-label="Email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== Scripts ==================== -->
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+  </button>
+
+  <script>
+    // Mobile menu toggle
+    const toggle = document.getElementById('navToggle');
+    const links  = document.getElementById('navLinks');
+    toggle.addEventListener('click', () => {
+      toggle.classList.toggle('active');
+      links.classList.toggle('open');
+    });
+    links.querySelectorAll('a').forEach(a =>
+      a.addEventListener('click', () => {
+        toggle.classList.remove('active');
+        links.classList.remove('open');
+      })
+    );
+
+    // Navbar background on scroll + back-to-top visibility
+    const nav = document.getElementById('nav');
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+      backToTop.classList.toggle('visible', window.scrollY > 400);
+    }, { passive: true });
+    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // Staggered reveal for grid children
+    function applyStagger(gridSelector) {
+      document.querySelectorAll(gridSelector).forEach(grid => {
+        Array.from(grid.children).forEach((child, i) => {
+          if (child.classList.contains('reveal')) {
+            child.style.transitionDelay = (i * 0.08) + 's';
+          }
+        });
+      });
+    }
+    applyStagger('.games-grid');
+    applyStagger('.services-grid');
+    applyStagger('.tech-grid');
+    applyStagger('.process-track');
+
+    // Scroll reveal (IntersectionObserver)
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      }),
+      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+    );
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Animated stat counters
+    function animateCounter(el) {
+      const text = el.textContent.trim();
+      const hasPlus = text.includes('+');
+      const num = parseInt(text.replace(/[^0-9]/g, ''), 10);
+      if (isNaN(num) || num === 0) return;
+      const duration = 1800;
+      const start = performance.now();
+      el.textContent = hasPlus ? '0+' : '0';
+      function tick(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = Math.round(eased * num);
+        el.textContent = hasPlus ? current + '+' : String(current);
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+    const counterObserver = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.querySelectorAll('.stat-number, .highlight-number').forEach(animateCounter);
+          counterObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    document.querySelectorAll('.stats-bar, .story-highlights').forEach(el => counterObserver.observe(el));
+
+    // Scroll-spy active nav highlighting
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+    const spyObserver = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const id = e.target.getAttribute('id');
+          navLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+          });
+        }
+      });
+    }, { rootMargin: '-20% 0px -60% 0px' });
+    sections.forEach(s => spyObserver.observe(s));
+
+    // Game filter tabs
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const gameCards  = document.querySelectorAll('.game-card[data-platform]');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filter = btn.dataset.filter;
+        gameCards.forEach(card => {
+          const platforms = card.dataset.platform;
+          const show = filter === 'all' || platforms.includes(filter);
+          card.classList.toggle('hidden', !show);
+          if (show && !card.classList.contains('visible')) {
+            card.classList.add('visible');
+          }
+        });
+      });
+    });
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+  </script>
 
 </body>
 </html>
