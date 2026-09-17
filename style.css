@@ -829,6 +829,20 @@ section { padding: 6rem 1.5rem; }
   color: #34d399;
   border-color: rgba(16,185,129,0.15);
 }
+.game-tag.ios {
+  background: rgba(156,163,175,0.14);
+  color: #d1d5db;
+  border-color: rgba(156,163,175,0.22);
+}
+
+.game-links {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-left: auto;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
 
 .game-link {
   display: inline-flex;
@@ -838,6 +852,9 @@ section { padding: 6rem 1.5rem; }
   font-weight: 600;
   margin-left: auto;
   white-space: nowrap;
+}
+.game-links .game-link {
+  margin-left: 0;
 }
 .game-link svg {
   width: 14px;
