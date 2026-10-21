@@ -549,3 +549,5 @@ rubiconproject.com,18364,RESELLER,0bfd66d529a55807
 indexexchange.com,216408,RESELLER,50b1c356f2c5c8fc
 
 facebook.com, 725244612832782, RESELLER, c3e20eee3f780d68
+
+vungle.com, 69526c9e675b9cd83da562e7, DIRECT, c107d686becd2d77
